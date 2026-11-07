@@ -1,0 +1,383 @@
+<!--ONLY HEADER AND FOOTER HERE, INSERT CONETENT HERE -->
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home · ConsumeRight</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* on hover to show title + description + "View page" cue.   */
+        .contentCard {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            display: block;
+            text-decoration: none;
+
+        }
+
+        .contentCard img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius);
+            border: none;
+            display: flex;
+            transition: transform .4s ease;
+        }
+
+        .contentCard:hover img,
+        .contentCard:focus-visible img {
+            transform: scale(1.06);
+        }
+
+        /* Colour badge top-left (the SDG number / label) */
+        .contentCard--badge {
+            position: absolute;
+            top: .75rem;
+            left: .75rem;
+            background: linear-gradient(120deg, var(--primary), var(--accent));
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: .28rem .6rem;
+            border-radius: 999px;
+            z-index: 2;
+        }
+
+        /* Overlay panel — slides up from bottom on hover */
+        .contentCard--overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top,
+                    rgba(27, 56, 76, .92) 0%,
+                    rgba(27, 56, 76, .72) 55%,
+                    rgba(27, 56, 76, .0) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .3s ease, transform .3s ease;
+            z-index: 1;
+        }
+
+        .contentCard:hover .contentCard--overlay,
+        .contentCard:focus-visible .contentCard--overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contentCard--overlay h3 {
+            margin: 0 0 .35rem;
+            color: #fff;
+            font-family: var(--font-display);
+            line-height: 1.25;
+        }
+
+        .contentCard--overlay h4 {
+            margin: 0 0 .6rem;
+            color: rgba(255, 255, 255, .84);
+            line-height: 1.25;
+        }
+
+        .contentCard--overlay p {
+            margin: 0 0 .6rem;
+            color: rgba(255, 255, 255, .84);
+            line-height: 1.45;
+        }
+
+        .viweMore_btn {
+            background: linear-gradient(120deg, var(--primary), var(--accent));
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 700;
+            font-family: var(--font-display);
+            color: #fff;
+            border: 1.5px solid rgba(255, 255, 255, .7);
+            border-radius: 999px;
+            padding: .3rem .75rem;
+            width: fit-content;
+            letter-spacing: .06em;
+            transition: background .2s, border-color .2s;
+        }
+
+        .contentCard:hover .viweMore_btn {
+            background: rgba(255, 255, 255, .18);
+            border-color: #fff;
+        }
+
+        .contentCard-holder {
+            display: grid;
+        }
+
+
+
+        @media (max-width: 600px) {
+
+            .contentCard--overlay {
+                opacity: 1;
+                transform: none;
+                background: linear-gradient(to top,
+                        rgba(27, 56, 76, .88) 0%,
+                        rgba(27, 56, 76, .5) 60%,
+                        transparent 100%);
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <!--Accessibilitly feature - hidden in noraml view-->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="site-branding">
+            <div class="brand-lockup">
+                <a class="site-logo" href="home.html" aria-label="ConsumeRight home">
+                    <img src="images/logo.png" alt="logo">
+                </a>
+                <p class="site-title">
+                    <a href="home.html">ConsumeRight</a>
+                    <span>SDG 12: Responsible consumption and productiont</span>
+                </p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">AIS</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <div class="page-wrap">
+        <div class="layout-body layout-body--single">
+            <main id="main-content" class="main-content">
+
+                <!--WRITE CODE HERE-->
+                <section class="page-intro">
+
+                    <h1>Mission and Goals</h1>
+
+                    <!--Home cards-->
+                    <div class="card-grid">
+                        <!--Card 1 -->
+                        <section class="card">
+                            <img src="images/home/intro-card1.jpg"
+                                alt="Half of the picture presents the pollution an the other half presents green.">
+                            <h2>Why SDG 12 Matters Today</h2>
+                            <h3>A Planet Under Pressure</h3>
+                            <p>Global consumption is at an all-time high and the consequences are becoming impossible to
+                                ignore. We are producing, using, and discarding more than the planet can sustainably
+                                handle — from mountains of electronic waste to fast fashion ending up in landfill within
+                                weeks of purchase. Natural resources are being depleted faster than they can recover,
+                                and the waste generated by modern lifestyles is polluting oceans, soil, and air. SDG 12
+                                pushes for a fundamental shift in how the world produces and uses resources, because
+                                without that shift, the environmental and economic damage will become irreversible
+                                within our lifetime.</p>
+                            <p>Actions you can take:</p>
+                            <ul>
+                                <li>Reduce single-use plastic in daily life</li>
+                                <li>Choose repairable products over disposable ones</li>
+                                <li>Research a brand's sustainability record before buying</li>
+                            </ul>
+                        </section>
+
+                        <!--Card 2: -->
+                        <section class="card">
+                            <img src="images/home/intro-card2.jpg"
+                                alt="Group of volunteers with garbage bags cleaning park area">
+                            <h2>Why It's Relevant to Students & Local Communities</h2>
+                            <h3> It Starts With Us</h3>
+                            <p>Students are among the most active consumers on the planet — constantly buying food,
+                                fashion, technology, and everyday essentials, often with little thought about where
+                                those things come from or where they end up. Local communities feel the direct effects
+                                of overconsumption through overflowing bins, polluted green spaces, and rising costs of
+                                living. The good news is that change at the student and community level is both
+                                achievable and powerful. Small, consistent choices made by thousands of students on a
+                                single campus can drive real demand for more sustainable products and practices,
+                                signalling to businesses and institutions that this generation expects better.</p>
+                            <p>Outcomes:</p>
+                            <ul>
+                                <li>Cleaner local environments with less landfill waste</li>
+                                <li>Lower household costs through mindful spending</li>
+                                <li>Stronger community culture of sharing and reuse</li>
+                            </ul>
+                        </section>
+
+
+                        <!--Card 3: -->
+                        <section class="card">
+                            <img src="images/home/intro-card3.jpg"
+                                alt="Activist taking care of environment during sorting paper waste to proper recycling bin on terrace">
+                            <h2>Who It's For</h2>
+                            <h3>Everyone Has a Role</h3>
+                            <p>SDG 12 is not a goal reserved for governments negotiating policy or corporations
+                                overhauling supply chains — it belongs to everyone. Shoppers, students, landlords,
+                                local businesses, universities, and public institutions are all part of the same
+                                system of production and consumption, and all have meaningful power to change it.
+                                Whether you are deciding what to buy, how to dispose of something, or how to run an
+                                organisation, your decisions ripple outward. The more people understand that
+                                sustainability is not a lifestyle reserved for a privileged few but a practical
+                                necessity for all, the faster meaningful progress becomes possible.</p>
+                            <p>Actions communities can do:</p>
+                            <ul>
+                                <li>Universities can adopt zero-waste campus policies</li>
+                                <li>Students can organise swap events for clothes and textbooks</li>
+                                <li>Local shops can switch to sustainable packaging</li>
+                            </ul>
+                        </section>
+
+                    </div>
+
+
+                </section>
+
+
+                <!--CONTENT PAGES-->
+                <section class="card section-stack">
+
+                    <h2>Find out more:</h2>
+                    <div class="card-grid">
+
+                        <section class="card card--interactive contentCard">
+                            <a href="content_ST1.html">
+                                <span class="contentCard--badge">ST 1</span>
+                                <img src="images/home/content-st1.jpg" alt="Rotten fruit and vegetables">
+
+                                <div class="card contentCard--overlay">
+                                    <h3>Food Loss &amp; Waste</h3>
+                                    <h4>by Safiya Nazly</h4>
+                                    <p>Every year, billions of tonnes of food never reach a plate — and the consequences
+                                        stretch far beyond an uneaten meal."</p>
+                                    <span class="viweMore_btn">View more</span>
+                                </div>
+                            </a>
+                        </section>
+
+                        <section class="card card--interactive contentCard">
+                            <a href="content_ST2.html">
+                                <span class="contentCard--badge">ST 2</span>
+                                <img src="images/home/content-st2.jpeg" alt="Microplastics">
+
+                                <div class="card contentCard--overlay">
+                                    <h3>Reducing plastic waste and sustainable packaging</h3>
+                                    <h4>by Lakna Dasuni</h4>
+                                    <p>91% of plastic isn’t recycled, 8 million tonnes enter oceans yearly—cutting
+                                        single-use plastic can make a big difference</p>
+                                    <span class="viweMore_btn">View more</span>
+                                </div>
+                            </a>
+                        </section>
+
+
+
+                        <section class="card card--interactive contentCard">
+                            <a href="content_ST3.html">
+                                <span class="contentCard--badge">ST 3</span>
+
+                                <img src="images/home/content-st3.jpeg"
+                                    alt="Racks of cheap clothing in a fast fashion retail store">
+
+                                <div class="card contentCard--overlay">
+                                    <h3>Fast Fashion & Clothing Waste</h3>
+                                    <h4>by Raiqa Abdul Qadir</h4>
+                                    <p>Fast fashion harms the environment; small choices make a difference</p>
+                                    <span class="viweMore_btn">View more</span>
+                                </div>
+                            </a>
+                        </section>
+
+                        <section class="card card--interactive contentCard">
+                            <a href="content_ST4.html">
+                                <span class="contentCard--badge">ST 4</span>
+                                <img src="images/home/content-st4.jpeg"
+                                    alt="Illustration representing green computing and sustainability">
+
+                                <div class="card contentCard--overlay">
+                                    <h3>E-Waste Management</h3>
+                                    <h4>by Aamina Rifas</h4>
+                                    <p>Understanding electronic waste, its global impact, and how students can adopt
+                                        sustainable habits to reduce their contribution.</p>
+                                    <span class="viweMore_btn">View more</span>
+                                </div>
+                            </a>
+                        </section>
+
+
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+
+
+
+    <div class="to-top"><a href="#top">Go to top</a></div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>ConsumeRight</strong>
+                <p>Group 1 - Sub-group 2</p>
+                <p>SDG 12 : Responsible consumption and production</p>
+            </div>
+            <nav class="footer-docs">
+                <div>
+                    <h3>Page editors</h3>
+                    <ul>
+                        <li><a href="pageEditor_ST1.html">Safiya Nazly — Page Editor</a></li>
+                        <li><a href="pageEditor_ST2.html">Lakna Dasuni — Page Editor</a></li>
+                        <li><a href="pageEditor_ST3.html">Raiqa Abdul Qadir — Page Editor</a></li>
+                        <li><a href="pageEditor_ST4.html">Aamina Rifas — Page Editor</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Validation</h3>
+                    <ul>
+                        <li><a href="validation_ST1.html">Safiya Nazly — Validation</a></li>
+                        <li><a href="validation_ST2.html">Lakna Dasuni — Validation</a></li>
+                        <li><a href="validation_ST3.html">Raiqa Abdul Qadir — Validation</a></li>
+                        <li><a href="validation_ST4.html">Aamina Rifas — Validation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Quick links</h3>
+                    <ul>
+                        <li><a href="splash.html">Intro splash</a></li>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="Compliance.pdf">Janet Compliance </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <p>Web Design &amp; Development Coursework · Group 1 - Sub-group 2</p>
+        </div>
+    </footer>
+</body>
+
+</html>

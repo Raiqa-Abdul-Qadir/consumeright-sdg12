@@ -1,0 +1,456 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile · ConsumeRight</title>
+
+    <!-- Shared stylesheet for the whole site -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Layout for stacking profile sections neatly */
+        .profile-builder {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        /* Container for buttons */
+        .profile-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* Styling for all profile buttons */
+        .profile-btn {
+            border: none;
+            border-radius: 999px;
+            padding: 0.8rem 1.1rem;
+            background: linear-gradient(120deg, var(--primary), var(--accent));
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Hover/focus interaction */
+        .profile-btn:hover,
+        .profile-btn:focus-visible {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+        }
+
+        /* Progress section layout */
+        .profile-progress-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 0.85rem;
+        }
+
+        /* Progress bar background */
+        .profile-progress-track {
+            width: 100%;
+            height: 18px;
+            background: #dbe5ec;
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* Progress fill */
+        .profile-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(120deg, var(--accent), var(--primary));
+            transition: width 0.3s ease;
+            border-radius: 999px;
+        }
+
+        /* Output boxes for each step */
+        .profile-step-box {
+            display: none; /* hidden until data is added */
+            margin-top: 1rem;
+            padding: 1rem 1rem 0.9rem;
+            border-radius: var(--radius-sm);
+            background: var(--surface-soft);
+            border-left: 4px solid var(--accent);
+        }
+
+        .profile-step-box p {
+            margin: 0.45rem 0;
+        }
+
+        /* Helper text styling */
+        .profile-note {
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <!-- Accessibility skip link -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Header and navigation -->
+    <header class="site-header">
+        <div class="site-branding">
+            <div class="brand-lockup">
+
+                <!-- Logo linking to homepage -->
+                <a class="site-logo" href="home.html" aria-label="ConsumeRight home">
+                    <img src="images/logo.png" alt="ConsumeRight logo">
+                </a>
+
+                <p class="site-title">
+                    <a href="home.html">ConsumeRight</a>
+                    <span>SDG 12: Responsible consumption and production</span>
+                </p>
+            </div>
+
+            <!-- Main navigation (Profile is active here) -->
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">AIS</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="profile.html" class="active" aria-current="page">Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-wrap">
+        <div class="layout-body layout-body--single">
+            <main id="main-content" class="main-content main-content--rich">
+
+                <!-- Page intro -->
+                <section class="page-intro">
+                    <h1>Build Your Sustainability Profile</h1>
+                    <p>
+                        Complete the profile step by step using the buttons below. You may skip prompts by pressing
+                        Cancel and return later to fill in missing information.
+                    </p>
+                </section>
+
+                <!-- Main profile builder -->
+                <div class="section-stack profile-builder">
+
+                    <!-- Step buttons -->
+                    <section class="card card--panel">
+                        <h2>User Profile Builder</h2>
+
+                        <p class="profile-note">
+                            The profile is built in three stages: basic details, interests and preferences,
+                            and actions or goals.
+                        </p>
+
+                        <!-- Buttons to run each step -->
+                        <div class="profile-actions">
+                            <button type="button" class="profile-btn" onclick="runStep1()" aria-label="Complete step 1 basic details">
+                                Step 1: Basic Details
+                            </button>
+                            <button type="button" class="profile-btn" onclick="runStep2()" aria-label="Complete step 2 interests and preferences">
+                                Step 2: Interests
+                            </button>
+                            <button type="button" class="profile-btn" onclick="runStep3()" aria-label="Complete step 3 actions and goals">
+                                Step 3: Actions
+                            </button>
+                        </div>
+
+                        <!-- Buttons to revisit steps -->
+                        <div class="profile-actions">
+                            <button type="button" class="profile-btn" onclick="revisitStep1()" aria-label="Return to step 1">
+                                Return to Step 1
+                            </button>
+                            <button type="button" class="profile-btn" onclick="revisitStep2()" aria-label="Return to step 2">
+                                Return to Step 2
+                            </button>
+                            <button type="button" class="profile-btn" onclick="revisitStep3()" aria-label="Return to step 3">
+                                Return to Step 3
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Progress section -->
+                    <section class="card">
+                        <h2>Progress</h2>
+
+                        <div class="profile-progress-meta">
+                            <p id="progressText" aria-live="polite">0% complete</p>
+                            <p id="stepText">No steps completed yet.</p>
+                        </div>
+
+                        <div class="profile-progress-track">
+                            <div
+                                id="progressBar"
+                                class="profile-progress-bar"
+                                role="progressbar"
+                                aria-label="Profile completion progress"
+                                aria-describedby="progressText"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-valuenow="0">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Output summary -->
+                    <section class="card">
+                        <h2>Profile Summary</h2>
+                        <p id="emptyMessage">No profile information yet.</p>
+
+                        <!-- Step 1 output -->
+                        <div id="step1Output" class="profile-step-box">
+                            <h3>Step 1: Basic Details</h3>
+                            <p id="nameOutput"></p>
+                            <p id="countryOutput"></p>
+                            <p id="roleOutput"></p>
+                        </div>
+
+                        <!-- Step 2 output -->
+                        <div id="step2Output" class="profile-step-box">
+                            <h3>Step 2: Interests and Preferences</h3>
+                            <p id="issueOutput"></p>
+                            <p id="habitOutput"></p>
+                            <p id="preferenceOutput"></p>
+                        </div>
+
+                        <!-- Step 3 output -->
+                        <div id="step3Output" class="profile-step-box">
+                            <h3>Step 3: Actions and Goals</h3>
+                            <p id="actionOutput"></p>
+                            <p id="goalOutput"></p>
+                            <p id="commitmentOutput"></p>
+                        </div>
+                    </section>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Back to top -->
+    <div class="to-top"><a href="#top">Go to top</a></div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>ConsumeRight</strong>
+                <p>Group 1 - Sub-group 2</p>
+                <p>SDG 12 : Responsible consumption and production</p>
+            </div>
+        </div>
+    </footer>
+
+	<script>
+		// Object to store all user inputs
+		const profile = {
+			name: "",
+			country: "",
+			role: "",
+			issue: "",
+			habit: "",
+			preference: "",
+			action: "",
+			goal: "",
+			commitment: ""
+		};
+
+		// Checks if any data has been entered
+		function hasAnyData() {
+			for (let key in profile) {
+				if (profile[key] !== "") {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		// Show or hide the empty message
+		function updateEmptyMessage() {
+			const emptyMessage = document.getElementById("emptyMessage");
+			emptyMessage.style.display = hasAnyData() ? "none" : "block";
+		}
+
+		// Updates the displayed profile information
+		function updateProfileDisplay() {
+			const step1Filled = profile.name || profile.country || profile.role;
+			document.getElementById("step1Output").style.display = step1Filled ? "block" : "none";
+			document.getElementById("nameOutput").textContent = profile.name ? "Name: " + profile.name : "";
+			document.getElementById("countryOutput").textContent = profile.country ? "Country: " + profile.country : "";
+			document.getElementById("roleOutput").textContent = profile.role ? "Role: " + profile.role : "";
+
+			const step2Filled = profile.issue || profile.habit || profile.preference;
+			document.getElementById("step2Output").style.display = step2Filled ? "block" : "none";
+			document.getElementById("issueOutput").textContent = profile.issue ? "Main issue cared about: " + profile.issue : "";
+			document.getElementById("habitOutput").textContent = profile.habit ? "Current habit: " + profile.habit : "";
+			document.getElementById("preferenceOutput").textContent = profile.preference ? "Preferred sustainability focus: " + profile.preference : "";
+
+			const step3Filled = profile.action || profile.goal || profile.commitment;
+			document.getElementById("step3Output").style.display = step3Filled ? "block" : "none";
+			document.getElementById("actionOutput").textContent = profile.action ? "Chosen action: " + profile.action : "";
+			document.getElementById("goalOutput").textContent = profile.goal ? "Goal: " + profile.goal : "";
+			document.getElementById("commitmentOutput").textContent = profile.commitment ? "Commitment: " + profile.commitment : "";
+
+			updateEmptyMessage();
+		}
+
+		// Updates progress bar and percentage
+		function updateProgress() {
+			const totalFields = 9;
+			let completedFields = 0;
+
+			for (let key in profile) {
+				if (profile[key] !== "") {
+					completedFields++;
+				}
+			}
+
+			const percentage = Math.round((completedFields / totalFields) * 100);
+
+			document.getElementById("progressText").textContent = percentage + "% complete";
+			document.getElementById("progressBar").style.width = percentage + "%";
+			document.getElementById("progressBar").setAttribute("aria-valuenow", percentage);
+
+			let completedSteps = 0;
+			if (profile.name || profile.country || profile.role) completedSteps++;
+			if (profile.issue || profile.habit || profile.preference) completedSteps++;
+			if (profile.action || profile.goal || profile.commitment) completedSteps++;
+
+			if (completedSteps === 0) {
+				document.getElementById("stepText").textContent = "No steps completed yet.";
+			} else {
+				document.getElementById("stepText").textContent =
+					"Step progress: " + completedSteps + " of 3 steps completed.";
+			}
+		}
+
+		// Saves input only if valid (not empty or cancelled)
+		function saveIfValid(fieldName, value) {
+			if (value !== null && value.trim() !== "") {
+				profile[fieldName] = value.trim();
+			}
+		}
+
+		// Step 1 prompts
+		function runStep1() {
+			const name = prompt("Step 1 - Enter your name (or press Cancel to skip):");
+			saveIfValid("name", name);
+
+			const country = prompt("Step 1 - Enter your country (or press Cancel to skip):");
+			saveIfValid("country", country);
+
+			const role = prompt("Step 1 - Enter your role, for example Student (or press Cancel to skip):");
+			saveIfValid("role", role);
+
+			updateProfileDisplay();
+			updateProgress();
+		}
+
+		// Step 2 prompts
+		function runStep2() {
+			const issue = prompt("Step 2 - What sustainability issue do you care about most? (or press Cancel to skip):");
+			saveIfValid("issue", issue);
+
+			const habit = prompt("Step 2 - What sustainable habit do you already follow? (or press Cancel to skip):");
+			saveIfValid("habit", habit);
+
+			const preference = prompt("Step 2 - What area do you want to improve: recycling, saving water, food waste, or shopping? (or press Cancel to skip):");
+			saveIfValid("preference", preference);
+
+			updateProfileDisplay();
+			updateProgress();
+		}
+
+		// Step 3 prompts
+		function runStep3() {
+			const action = prompt("Step 3 - What action will you take? (or press Cancel to skip):");
+			saveIfValid("action", action);
+
+			const goal = prompt("Step 3 - What is your sustainability goal? (or press Cancel to skip):");
+			saveIfValid("goal", goal);
+
+			const commitment = prompt("Step 3 - How often will you do this action? (or press Cancel to skip):");
+			saveIfValid("commitment", commitment);
+
+			updateProfileDisplay();
+			updateProgress();
+		}
+
+		// Revisit Step 1 (only asks for missing fields)
+		function revisitStep1() {
+			if (profile.name === "") {
+				const name = prompt("Return to Step 1 - Enter your name:");
+				saveIfValid("name", name);
+			}
+
+			if (profile.country === "") {
+				const country = prompt("Return to Step 1 - Enter your country:");
+				saveIfValid("country", country);
+			}
+
+			if (profile.role === "") {
+				const role = prompt("Return to Step 1 - Enter your role:");
+				saveIfValid("role", role);
+			}
+
+			updateProfileDisplay();
+			updateProgress();
+		}
+
+		// Revisit Step 2
+		function revisitStep2() {
+			if (profile.issue === "") {
+				const issue = prompt("Return to Step 2 - What sustainability issue do you care about most?");
+				saveIfValid("issue", issue);
+			}
+
+			if (profile.habit === "") {
+				const habit = prompt("Return to Step 2 - What sustainable habit do you already follow?");
+				saveIfValid("habit", habit);
+			}
+
+			if (profile.preference === "") {
+				const preference = prompt("Return to Step 2 - What area do you want to improve?");
+				saveIfValid("preference", preference);
+			}
+
+			updateProfileDisplay();
+			updateProgress();
+		}
+
+		// Revisit Step 3
+		function revisitStep3() {
+			if (profile.action === "") {
+				const action = prompt("Return to Step 3 - What action will you take?");
+				saveIfValid("action", action);
+			}
+
+			if (profile.goal === "") {
+				const goal = prompt("Return to Step 3 - What is your sustainability goal?");
+				saveIfValid("goal", goal);
+			}
+
+			if (profile.commitment === "") {
+				const commitment = prompt("Return to Step 3 - How often will you do this action?");
+				saveIfValid("commitment", commitment);
+			}
+
+			updateProfileDisplay();
+			updateProgress();
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback &amp; Programme Directory - SDG 12</title>
+  <link rel="stylesheet" href="css/style.css">
+<style>
+
+		/* Scrollable Programme Cards Section */
+		.programme-iframe {
+			height: 420px;
+			width: 100%;
+			border: none;
+			border-radius: 10px;
+		}
+	
+		/* Dropdown Filter Bar */
+        .sort {
+            margin-bottom: 20px;
+        }
+
+        .filter-dropdown {
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+			background-color: var(--surface);
+			color: var(--text);
+            font-size: 15px;
+            cursor: pointer; /* To the tell the user its clickable */
+            transition: border-color 0.3s ease;
+			/* Prevents it getting too long */
+			width: auto;        
+			min-width: 150px;   
+			max-width: 210px; 
+        }
+
+        .filter-dropdown:hover {
+            border-color: var(--primary-strong);
+        }
+	
+		/* Ratings & Reviews Section */
+		.review-button-container {
+			margin-top: 15px;
+		}
+
+		.review-button-btn {
+			background-color: var(--primary);
+			height: 30px;
+			color: var(--surface);
+			border: none;
+			padding: 10px;
+			border-radius: 20px;
+			cursor: pointer;
+			font-weight: 600;
+			transition: 0.3s ease;
+		}
+
+		.review-button-btn:hover {
+			background-color: var(--primary-strong);
+			transform: translateY(-2px); /* Lifts the element up slightly for a hover effect */
+		}
+		
+        .ratings-section {
+            background-color: var(--surface-soft);
+            border-radius: 15px;
+            padding: 15px;
+			box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            
+        }
+
+        /* Overall score display */
+        .overall-score {
+            display: flex; /* Enables flexible alignment */
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+			flex-direction: row;
+			flex-wrap: nowrap;
+        }
+
+        .score-number {
+            font-size: 70px;
+            font-weight: 600;
+            color: var(--accent-strong);
+            line-height: 1.5;
+        }
+
+        .score-label {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .review-count {
+            font-size: 15px;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+
+        .score-stars {
+            font-size: 30px;
+            color: var(--accent);
+            letter-spacing: 3px;
+        }
+		
+		.reviews-heading {
+			color: var(--text); 
+		}
+
+        /* Individual review card */
+        .review-card {
+            border-left: 4px solid var(--primary);
+        }
+
+        .review-card .see-more:hover {
+            color: var(--primary-strong);
+        }
+		
+		.see-more {
+			transition: color 0.3s ease;
+		}
+
+        .review-meta {
+            display: flex;
+            justify-content: space-between; /* Pushes name and date to opposite ends */
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--border);
+        }
+
+        .review-meta .reviewer-name {
+			font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .review-meta .review-date {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .review-rating {
+            font-weight: 600;
+            background-color: var(--accent-strong);
+            color: var(--surface);
+            padding: 5px;
+            border-radius: 5px;
+        }
+		
+		/* Feedback Form Section */
+        .form-section {
+            background-color: var(--surface);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        }
+		
+		/* Fieldset styling */
+        fieldset {
+            border-radius: 10px;
+            padding: 25px;
+			border-color: var(--border);
+            margin-bottom: 25px;
+		}
+
+        legend {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 20px;
+            padding: 5px;
+            background-color: var(--surface-soft);
+        }
+
+		/* Makes space below each label */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Required field indicator */
+        .required {
+            color: #e07b39;
+        }
+		
+		.form-intro {
+			color: var(--text-muted);
+		}
+
+        /* All form inputs */
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 10px;
+            border: 2px solid var(--border);
+            border-radius: 5px;
+            font-size: 15px;
+            color: var(--text);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--surface-soft);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45,106,79,0.15);
+            background-color: var(--surface);
+        }
+
+        /* Input error state */
+        .form-group input.error,
+        .form-group textarea.error,
+        .form-group select.error {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 3px rgba(220,53,69,0.15);
+        }
+
+        /* Error message text */
+        .error-msg {
+            display: none;
+            color: #dc3545;
+            font-weight: 500;
+        }
+		
+        .error-msg.show {
+            display: block;
+			margin-top: 5px;
+        }
+		
+		/* Radio buttons displayed vertically using flex column */
+		#radio-div {
+			display: flex;
+			flex-direction: column; /* force vertical */
+			align-items: flex-start;
+		}
+
+		#radio-div .radio-label {
+			display: flex; 
+			gap: 10px;
+		}
+
+        /* Character counter */
+        .char-counter {
+            text-align: right;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .char-counter.warning {
+            color: #e07b39;
+            font-weight: 600;
+        }
+
+        .char-counter.limit {
+            color: #dc3545;
+            font-weight: 700;
+        }
+
+        /* Form submit button */
+        .form-submit-area {
+            text-align: center;
+        }
+
+        .btn-submit {
+            background-color: var(--primary);
+            color: var(--surface);
+            padding: 15px;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-strong);
+            transform: translateY(-2px);
+        }
+		
+		input, textarea, select {
+			width: 100%;
+		}
+
+        /* Confirmation message */
+        .confirmation-msg {
+            display: none;
+            background-color: var(--surface-soft);
+            border: 2px solid var(--accent-strong);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .confirmation-msg.show {
+            display: block;
+			margin-bottom: 20px;
+        }
+
+        /* Two column form layout */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Responsive layout - adjusts grid columns for different screen sizes */
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+			
+			.form-row {
+                grid-template-columns: 1fr;
+            }
+
+            /* Overall score for smaller screens */
+			.overall-score {
+                gap: 15px;
+            }
+        }
+		
+</style>
+</head>
+
+<body id="top">
+
+  <!--Accessibilitly feature - hidden in normal view-->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-branding">
+      <div class="brand-lockup">
+        <a class="site-logo" href="home.html" aria-label="ConsumeRight">
+          <img src="images/logo.png" alt="logo">
+        </a>
+        <p class="site-title">
+          <a href="home.html">ConsumeRight</a>
+          <span>SDG 12: Responsible consumption and production</span>
+        </p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html">AIS</a></li>
+          <li><a href="feedback.html" class="active">Feedback</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <div class="page-wrap">
+    <div class="layout-body layout-body--single">
+      <main id="main-content" class="main-content">
+
+        <!-- Banner -->
+        <div class="page-intro">
+            <h1>Feedback &amp; Programme Directory</h1>
+            <p>Explore sustainable initiatives and share your experiences to inspire better choices.</p>
+        </div>
+
+        <!-- Section 1 : Programme Directory -->
+        <div class="card">
+            <h2>Sustainable Programmes &amp; Opportunities</h2>
+
+            <!-- Sort dropdown bar -->
+            <div class="sort">
+				<label for="sort-dropdown">Sort by:</label>
+				<select class="filter-dropdown" id="sort-dropdown">
+					<option value="popular">MOST POPULAR</option>
+					<option value="nearest">NEAREST</option>
+					<option value="student">STUDENT-FRIENDLY</option>
+					<option value="impact">COMMUNITY IMPACT</option>
+				</select>
+			</div>
+			
+            <!-- Scrollable secion -->
+            <iframe
+				src="programmes.html" 
+				class="programme-iframe"
+				title="Programme Directory">
+			</iframe>
+		</div>
+
+        <!-- Section 2 : Ratings & Reviews -->
+        <div class="card">
+            <h2>Community Ratings &amp; Reviews</h2>
+
+            <div class="ratings-section">
+
+                <!-- Overall score -->
+                <div class="overall-score">
+                    <div>
+                        <div class="score-number">8.6</div>
+                    </div>
+                    <div>
+                        <div class="score-stars">★★★★☆</div>
+                        <div class="score-label">Excellent</div>
+                    </div>
+                </div>
+				
+				<h3 class="reviews-heading">Recent reviews</h3>
+		
+                <!-- Three review cards -->
+                <div class="card-grid">
+
+                    <!-- Review 1 -->
+					<div class="card card--panel review-card">
+                        <div class="review-rating">9/10</div>
+                        <h3>Saving my laptop (and my budget!)</h3>
+                        <p>I thought my laptop was done for, but a volunteer at the Repair Cafe fixed it in under an hour for free. These sessions are incredibly valuable skills for the community and stop tech from going to landfill.</p>
+                        <a href="#" class="see-more">See more</a>
+                        <div class="review-meta">
+                            <span class="reviewer-name">Priya S.</span>
+                            <span class="review-date">18 March 2026</span>
+                        </div>
+                    </div>
+                    
+
+                    <!-- Review 2 -->
+                    <div class="card card--panel review-card">
+                        <div class="review-rating">8/10</div>
+                        <h3>A total student game changer</h3>
+                        <p>I save around £15 a week using Too Good To Go. The food is always fresh and it feels great knowing nothing is going to waste. I highly recommend this to any student looking to eat well on a budget.</p>
+						
+                        <a href="#" class="see-more">See more</a>
+						
+                        <div class="review-meta">
+                            <span class="reviewer-name">James K.</span>
+                            <span class="review-date">05 March 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+					<div class="card card--panel review-card">
+                        <div class="review-rating">9/10</div>
+                        <h3>Circular fashion at its best!</h3>
+                        <p>The Campus Swap Shop completely changed how I think about buying new things. I swapped three textbooks and got everything I needed for the semester without spending a penny.</p>
+                        <a href="#" class="see-more">See more</a>
+                        <div class="review-meta">
+                            <span class="reviewer-name">Aaisha M.</span>
+                            <span class="review-date">12 February 2026</span>
+                        </div>
+                    </div>
+                    
+                </div>
+				
+				<div class="review-button-container"> <button type="button" class="review-button-btn" id="button">See all 214 reviews</button></div>
+            </div>
+		</div>
+
+        <!-- Section 3 : Feedback Form -->
+        <div class="card">
+            <h2>Share Your Feedback</h2>
+			
+			<div id="feedbackContainer" class="form-section">
+				<p class="form-intro">We would love to hear your thoughts on the programmes above or your experience with sustainable consumption. Fill in the form below!</p>
+
+				<!-- Feedback form -->
+				<form id="feedbackForm" novalidate>
+
+					<!-- Fieldset 1: Personal Details -->
+					<fieldset>
+						<legend>Personal Details</legend>
+
+						<div class="form-row">
+							<!-- Full Name -->
+							<div class="form-group">
+								<label for="fullName">Full Name <span class="required">*</span></label>
+								<input type="text" id="fullName" name="fullName" placeholder="e.g. John Smith">
+								<span class="error-msg" id="fullNameError">Please enter your full name.</span>
+							</div>
+
+							<!-- Email -->
+							<div class="form-group">
+								<label for="email">Email Address <span class="required">*</span></label>
+								<input type="email" id="email" name="email" placeholder="e.g. John@gmail.com">
+								<span class="error-msg" id="emailError">Please enter a valid email address.</span>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<!-- Telephone -->
+							<div class="form-group">
+								<label for="phone">Telephone Number <span class="required">*</span></label>
+								<input type="tel" id="phone" name="phone" placeholder="e.g. 077 123 456">
+								<span class="error-msg" id="phoneError">Please enter a valid telephone number.</span>
+							</div>
+
+							<!-- Date -->
+                            <div class="form-group">
+                                <label for="visitDate">Date of Experience <span class="required">*</span></label>
+                                <input type="date" id="visitDate" name="visitDate">
+                                <span class="error-msg" id="visitDateError">Please select a date.</span>
+                            </div>
+						</div>
+
+						<!-- Address -->
+						<div class="form-group">
+							<label for="address">Address<span class="required">*</span></label>
+							<textarea id="address" name="address" rows="2" placeholder="Enter your address (e.g. 123 Main Street, City, Country)"></textarea>
+							<span class="error-msg" id="addressError">Please enter your address.</span>
+						</div>			
+					</fieldset>
+
+                    <!-- Fieldset 2: Feedback Details -->
+                    <fieldset>
+                        <legend>Feedback Details</legend>
+
+                        <!-- Programme selection dropdown -->
+                        <div class="form-group">
+                            <label for="programme">Programme You Experienced <span class="required">*</span></label>
+                            <select id="programme" name="programme">
+                                <option value="">-- Select a programme --</option>
+                                <option value="tgtg">Too Good To Go</option>
+                                <option value="swapshop">Campus Swap Shop</option>
+                                <option value="repaircafe">Repair Café</option>
+                                <option value="plasticfree">Plastic Free July Challenge</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error-msg" id="programmeError">Please select a programme.</span>
+                        </div>
+						
+						<!-- Rating selection dropdown -->
+						<div class="form-group">
+							<label for="rating">Overall Rating</label>
+							<select id="rating" name="rating">
+								<option value="">-- Select rating --</option>
+								<option value="5">Excellent (5)</option>
+								<option value="4">Good (4)</option>
+								<option value="3">Average (3)</option>
+								<option value="2">Poor (2)</option>
+								<option value="1">Very Poor (1)</option>
+							</select>
+						</div>
+						
+						<!-- Recommendation selection (yes/no) -->
+						<div class="form-group">
+							<label>Would you recommend this programme?</label>
+						
+							<div id="radio-div">
+								<label class="radio-label">
+									<input type="radio" name="recommend" value="yes">
+									<span>Yes</span>
+								</label>
+
+								<label class="radio-label">
+									<input type="radio" name="recommend" value="no">
+									<span>No</span>
+								</label>
+							</div>
+						</div>
+							
+						<!-- Datalist -->	
+						<div class="form-group">
+							<label for="topic">Subject of Feedback</label>
+							<input type="text" id="topic" name="topic" list="topicSuggestions" placeholder="Start typing a topic...">
+							
+							<datalist id="topicSuggestions">
+								<option value="Pricing/Value">
+								<option value="Location Accessibility">
+								<option value="Staff Helpfulness">
+								<option value="Quality of Items">
+								<option value="Booking Process">
+							</datalist>
+						</div>
+						
+						<!-- Date and time of submission -->
+                        <div class="form-group">
+                            <label for="submitDateTime">Submission Date &amp; Time</label>
+                            <input type="datetime-local" id="submitDateTime" name="submitDateTime">
+                        </div>
+						
+                        <!-- Comment with live character counter -->
+                        <div class="form-group">
+                            <label for="comment">Your Comment <span class="required">*</span></label>
+                            <textarea
+                                id="comment"
+                                name="comment"
+                                rows="5"
+                                maxlength="300"
+                                placeholder="Tell us about your experience (max 300 characters) ..."></textarea>
+                            <!-- Live character counter - updated by JavaScript -->
+                            <div class="char-counter" id="charCounter">300 characters remaining</div>
+                            <span class="error-msg" id="commentError">Please write a comment (at least 10 characters).</span>
+                        </div>
+
+                    </fieldset>
+
+                    <!-- Submit button -->
+                    <div class="form-submit-area">
+                        <button type="submit" class="btn-submit" id="submitBtn">Send Feedback</button>
+                    </div>
+				</form>
+				
+				<!-- Confirmation message - shown by JavaScript on successful submit -->
+				<div class="confirmation-msg" id="confirmationMsg">
+					<h3>Thank you for your feedback!</h3>
+					<p>We truly appreciate your input. Every response helps us refine our programmes and create a more responsible future.</p>
+				</div>
+			</div>
+		</div>
+      </main>
+    </div>
+  </div>
+
+
+  
+
+  <div class="to-top"><a href="#top">Go to top</a></div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>ConsumeRight</strong>
+        <p>Group 1 - Sub-group 2</p>
+        <p>SDG 12: Responsible consumption and production</p>
+      </div>
+      <nav class="footer-docs">
+        <div>
+          <h3>Page editors</h3>
+          <ul>
+            <li><a href="pageEditor_ST1.html">Safiya Nazly — Page Editor</a></li>
+            <li><a href="pageEditor_ST2.html">Lakna Dasuni — Page Editor</a></li>
+            <li><a href="pageEditor_ST3.html">Raiqa Abdul Qadir — Page Editor</a></li>
+            <li><a href="pageEditor_ST4.html">Aamina Rifas — Page Editor</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Validation</h3>
+          <ul>
+            <li><a href="validation_ST1.html">Safiya Nazly — Validation</a></li>
+            <li><a href="validation_ST2.html">Lakna Dasuni — Validation</a></li>
+            <li><a href="validation_ST3.html">Raiqa Abdul Qadir — Validation</a></li>
+            <li><a href="validation_ST4.html">Aamina Rifas — Validation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="splash.html">Intro splash</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="Compliance.pdf">Janet Compliance </a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>Web Design &amp; Development Coursework · Group 1 - Sub-group 2</p>
+    </div>
+</footer>
+
+	<!-- JavaScript -->
+    <script>
+	
+        /* Live Character Counter */
+        const commentBox = document.getElementById("comment");
+        const charCounter = document.getElementById("charCounter");
+        const maxLength = 300;
+
+        commentBox.addEventListener("input", function () {
+            // Calculates how many characters are remaining
+            const remaining = maxLength - commentBox.value.length;
+            charCounter.textContent = remaining + " characters remaining";
+
+            // Change colour when getting close to limit
+            charCounter.classList.remove("warning", "limit");
+            if (remaining <= 50 && remaining > 10) {
+                charCounter.classList.add("warning"); /* Orange warning */
+            } else if (remaining <= 10) {
+                charCounter.classList.add("limit"); /* Red danger */
+            }
+        });
+
+        /* Form Validation */
+
+        // Helper function - shows error message for a field
+        function showError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            input.classList.add("error");
+            error.classList.add("show");
+        }
+
+        // Helper function - clears error message for a field
+        function clearError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            input.classList.remove("error");
+            error.classList.remove("show");
+        }
+
+        // Helper function - checks if email format is valid
+        function isValidEmail(email) {
+            /* Basic email format check using regex */
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }		
+
+        // Main form submit handler
+        document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+            // Prevent default form submission
+            e.preventDefault(); // Stops the form from submitting automatically
+
+            // Track if form is valid
+            let isValid = true;
+
+            /* --- Check Full Name --- */
+            const fullName = document.getElementById("fullName").value.trim();
+            if (fullName === "") {
+                showError("fullName", "fullNameError");
+                isValid = false;
+            } else {
+                clearError("fullName", "fullNameError");
+            }
+
+            /* --- Check Email --- */
+            const email = document.getElementById("email").value.trim();
+            if (email === '' || !isValidEmail(email)) {
+                showError("email", "emailError");
+                isValid = false;
+            } else {
+                clearError("email", "emailError");
+            }
+			
+			/* --- Check Telephone --- */
+			const phone = document.getElementById("phone").value.trim();
+			if (phone === "") {
+				showError("phone", "phoneError");
+				isValid = false;
+			} else {
+				clearError("phone", "phoneError");
+			}
+
+            /* --- Check Date --- */
+            const visitDate = document.getElementById("visitDate").value;
+            if (visitDate === "") {
+                showError("visitDate", "visitDateError");
+                isValid = false;
+            } else {
+                clearError("visitDate", "visitDateError");
+            }
+			
+			/* --- Check Address --- */
+			const address = document.getElementById("address").value.trim();
+			if (address === "") {
+				showError("address", "addressError");
+				isValid = false;
+			} else {
+				clearError("address", "addressError");
+			}
+
+            /* --- Check Programme Selection --- */
+            const programme = document.getElementById("programme").value;
+            if (programme === "") {
+                showError("programme", "programmeError");
+                isValid = false;
+            } else {
+                clearError("programme", "programmeError");
+            }
+
+            /* --- Check Comment --- */
+            const comment = document.getElementById("comment").value.trim();
+            if (comment.length < 10) {
+                showError("comment", "commentError");
+                isValid = false;
+            } else {
+                clearError("comment", "commentError");
+            }
+			
+			/* --- If all valid, show confirmation --- */
+			if (isValid) {
+				// Hide the intro text and the form 
+				document.querySelector(".form-intro").style.display = "none";
+				document.getElementById("feedbackForm").style.display = "none";
+
+				// Show the confirmation message 
+				const confMsg = document.getElementById("confirmationMsg");
+				confMsg.classList.add("show");
+
+				// Scroll smoothly to the thank you message
+				confMsg.scrollIntoView({ behavior: "smooth" });
+			}
+        });
+
+        /* Clear Errors on Input */
+        document.getElementById("fullName").addEventListener("input", function () {
+            if (this.value.trim() !== "") clearError("fullName", "fullNameError");
+        });
+
+        document.getElementById("email").addEventListener("input", function () {
+            if (isValidEmail(this.value.trim())) clearError('email', 'emailError');
+        });
+		
+		document.getElementById("phone").addEventListener("input", function () {
+			if (this.value.trim() !== "") clearError("phone", "phoneError");
+		});
+		
+		document.getElementById("address").addEventListener("input", function () {
+			if (this.value.trim() !== "") clearError("address", "addressError");
+		});
+
+        document.getElementById("visitDate").addEventListener("change", function () {
+            if (this.value !== "") clearError("visitDate", "visitDateError");
+        });
+
+        document.getElementById("programme").addEventListener("change", function () {
+            if (this.value !== "") clearError("programme", "programmeError");
+        });
+
+        document.getElementById("comment").addEventListener("input", function () {
+            if (this.value.trim().length >= 10) clearError("comment", "commentError");
+        });
+
+    </script> 
+</body>
+</html>

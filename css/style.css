@@ -1,0 +1,579 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap");
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  /* ── Color Scheme ─────────────────────────────────────────────── */
+  --bg: #f3f8ff;
+  --bg-soft: #eef4e8;
+  --surface: #ffffff;
+  --surface-soft: #f8fbf0;
+  --text: #24333f;
+  --text-muted: #4a5f6c;
+  --primary: #3f6f8f;
+  --primary-strong: #2b5675;
+  --accent: #9ab46a;
+  --accent-strong: #7f9d4f;
+  --border: #c7d9e6;
+
+
+  --radius: 1rem;
+  --radius-sm: 0.65rem;
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "Outfit", system-ui, sans-serif;
+  --shadow-sm: 0 6px 14px rgba(25, 56, 76, .08);
+  --shadow-lg: 0 16px 38px rgba(25, 56, 76, .16);
+  --header-offset: 5.4rem;
+}
+
+/* ── Reset / base ───────────────────────────────────────────── */
+* {
+  box-sizing: border-box
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--primary-strong);
+  text-decoration: none
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: .2em
+}
+
+/* Hides off-screen until keyboard-focused. Required for a11y marks. */
+.skip-link {
+  position: absolute;
+  top: -99px;
+  left: 1rem;
+  background: var(--primary);
+  color: #fff;
+  padding: .55rem .9rem;
+  border-radius: 999px;
+  z-index: 999
+}
+
+.skip-link:focus {
+  top: 1rem
+}
+
+
+/* ── Page structure ─────────────────────────────────────────── */
+/* .page-wrap  — the flex column between header and footer      */
+.page-wrap {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+/* .site-header   — sticky top bar                              */
+/* .site-branding — max-width wrapper, flex row inside          */
+/* .brand-lockup  — logo + title side by side                   */
+/* .site-logo     — the square logo link                        */
+/* .site-title    — the <p> holding site name + tagline         */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, #f8fcff, #ecf5fb);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.site-branding {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: .8rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: .7rem
+}
+
+.site-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(140deg, var(--accent), var(--primary));
+  border: 1px solid #b6cbda;
+  display: block;
+}
+
+.site-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block
+}
+
+.site-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  line-height: 1.2;
+  color: var(--primary-strong);
+}
+
+.site-title>a {
+  color: inherit;
+  text-decoration: none
+}
+
+.site-title span {
+  display: block;
+  font-size: .62em;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted)
+}
+
+/* Header nav pills */
+.site-branding nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem
+}
+
+.site-branding nav a {
+  display: inline-block;
+  padding: .42rem .75rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--primary-strong);
+  font-weight: 600
+}
+
+.site-branding nav a:hover,
+.site-branding nav a:focus-visible {
+  background: #e7f1f8;
+  border-color: #b9d1e0;
+  text-decoration: none
+}
+
+/* Add class="active" to the current page's nav link */
+.site-branding nav a.active {
+  background: linear-gradient(120deg, var(--primary), var(--accent));
+  color: #fff;
+  border-color: #8eb0c7
+}
+
+/* ── Layout grid ─────────────────────────────────────────────── */
+/* .layout-body          — sidebar + main two-column grid       */
+/* .layout-body--single  — full-width (no sidebar) variant      */
+.layout-body {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 1.3rem;
+}
+
+.layout-body--single {
+  grid-template-columns: 1fr
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+/* .sidebar-nav         — sticky scrollable left panel          */
+/* .sidebar-nav__title  — small uppercase section heading       */
+/* .sidebar-nav__label  — muted helper text above a list        */
+/* .sidebar-nav__list   — jump-link <ul>                        */
+/* .sidebar-nav__sub    — links inside a <details> block        */
+/* <details>/<summary>  — collapsible student groups            */
+.sidebar-nav {
+  margin-top: 1.4rem;
+  max-height: calc(100vh - var(--header-offset) - .8rem);
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-nav__title {
+  margin: 0 0 .7rem;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent-strong)
+}
+
+/*remove??*/
+.sidebar-nav__label {
+  display: block;
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-bottom: .45rem
+}
+
+.sidebar-nav__list,
+.sidebar-nav .sidebar-nav__sub ul {
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+
+.sidebar-nav__list li,
+.sidebar-nav .sidebar-nav__sub li {
+  margin-bottom: .35rem
+}
+
+.sidebar-nav__list a,
+.sidebar-nav .sidebar-nav__sub a {
+  font-size: .88rem;
+  color: var(--text-muted)
+}
+
+.sidebar-nav details {
+  margin-bottom: .45rem;
+  border: 1px solid #d8e6ef;
+  border-radius: var(--radius-sm);
+  background: #f9fcff
+}
+
+.sidebar-nav details[open] {
+  border-color: #b8cfdd
+}
+
+.sidebar-nav summary {
+  cursor: pointer;
+  list-style: none;
+  padding: .55rem .65rem;
+  font-family: var(--font-display);
+  color: var(--primary-strong)
+}
+
+.sidebar-nav summary::-webkit-details-marker {
+  display: none
+}
+
+.sidebar-nav .sidebar-nav__sub {
+  padding: 0 .65rem .65rem;
+  border-top: 1px solid #e2eef5
+}
+
+/* ── Main content area ──────────────────────────────────────── */
+/* .main-content        — right column padding                  */
+/* .main-content--rich  — adds gradient bg to .page-intro       */
+.main-content {
+  padding: 1.7rem 0 4rem
+}
+
+.main-content--rich .page-intro {
+  background: linear-gradient(135deg, #eff7ff, #f4f9eb)
+}
+
+/* ── Page intro box ─────────────────────────────────────────── */
+/* .page-intro — the title + intro paragraph box at top of main */
+.page-intro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.35rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.2rem;
+}
+
+/* Shared heading + text styles inside page-intro and cards */
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  color: var(--primary-strong);
+  font-family: var(--font-display)
+}
+
+p,
+p,
+li {
+  color: var(--text-muted)
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid #d6e6ef
+}
+
+/* ── Section stack ───────────────────────────────────────────── */
+/* .section-stack — wraps cards in a vertical flex column       */
+.section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem
+}
+
+/* ── Cards ───────────────────────────────────────────────────── */
+/* .card              — base white box (use on almost everything)*/
+/* .card--interactive — lifts on hover; add on clickable cards  */
+/* .card--panel       — slightly off-white background variant   */
+/* .card-grid         — responsive side-by-side card row        */
+/* .inset-block       — dashed callout box inside a card        */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card--interactive {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .2s ease
+}
+
+.card--interactive:hover,
+.card--interactive:focus-within {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #a7c4d6
+}
+
+.card--panel {
+  background: var(--surface-soft)
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem
+}
+
+.inset-block {
+  margin-top: .7rem;
+  padding: .75rem .9rem;
+  background: #edf5fb;
+  border: 1px dashed #b9d0df;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted)
+}
+
+/* ── Table ───────────────────────────────────────────────────── */
+/* .table-wrap — always wrap <table> in this for scroll + style */
+.table-wrap {
+  overflow: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border)
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff
+}
+
+th,
+td {
+  padding: .58rem .7rem;
+  border-bottom: 1px solid #e3edf4;
+  text-align: left;
+  vertical-align: top
+}
+
+th {
+  background: #ebf4fa;
+  color: var(--primary-strong);
+  font-family: var(--font-display);
+  font-size: .86rem
+}
+
+tr:nth-child(even) td {
+  background: #fbfdff
+}
+
+
+/* ── Go-to-top button ────────────────────────────────────────── */
+/* .to-top — fixed bottom-right; just keep the HTML as-is      */
+.to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 900
+}
+
+.to-top a {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999px;
+  padding: .55rem .95rem;
+  box-shadow: var(--shadow-sm);
+  font-weight: 700
+}
+
+.to-top a:hover {
+  background: var(--primary-strong);
+  text-decoration: none
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+/* .site-footer   — full-width footer bar                       */
+/* .footer-inner  — max-width wrapper + two-col grid            */
+/*   left col:  brand name + tagline                            */
+/*   right col: .footer-docs — auto-fit grid of link columns   */
+/* .footer-bottom — thin copyright line                         */
+.site-footer {
+  margin-top: auto;
+  background: linear-gradient(180deg, #ecf5fb, #e8f2e5);
+  border-top: 1px solid var(--border)
+}
+
+.footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 1.7rem 1.2rem 1.3rem;
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) minmax(0, 2.2fr);
+  gap: 1.4rem;
+}
+
+/* Brand col — just use a <strong> and a <p> inside a <div> */
+.footer-inner strong {
+  display: block;
+  color: var(--primary-strong);
+  font-size: 1.28rem;
+  font-family: var(--font-display)
+}
+
+.footer-inner>div>p {
+  margin: .35rem 0 0;
+  color: var(--text-muted)
+}
+
+/* Links col */
+.footer-docs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.1rem
+}
+
+.footer-docs h3 {
+  margin: 0 0 .6rem;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  font-family: var(--font-display)
+}
+
+.footer-docs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+
+.footer-docs li {
+  margin-bottom: .42rem
+}
+
+.footer-docs a {
+  color: var(--text-muted)
+}
+
+.footer-bottom {
+  border-top: 1px solid #d3e2ed;
+  text-align: center;
+  padding: .85rem 1rem
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: .82rem;
+  color: var(--text-muted)
+}
+
+/* ── Code snippets ───────────────────────────────────────────── */
+.main-content code {
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+  background: #edf5fa;
+  border: 1px solid #d2e4ef;
+  padding: .1em .34em;
+  border-radius: 4px;
+  color: #214864
+}
+
+/* ── Validation / report page helpers ───────────────────────── */
+/* .validation-placeholder — dashed box for screenshot evidence */
+/* .meeting-note           — small muted note above a table    */
+/* .placeholder-text       — italic grey fill-in reminders     */
+.validation-placeholder {
+  min-height: 140px;
+  border: 2px dashed #bad1df;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  background: #f8fcff
+}
+
+.meeting-note {
+  font-size: .9rem;
+  color: var(--text-muted);
+  margin: 0 0 .75rem
+}
+
+.placeholder-text {
+  font-style: italic;
+  color: #5c7383
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width:940px) {
+  .layout-body {
+    grid-template-columns: 1fr
+  }
+
+  .sidebar-nav {
+    max-height: 48vh;
+    margin-top: 1rem
+  }
+
+  .site-branding {
+    flex-direction: column;
+    align-items: flex-start
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr
+  }
+}
+
+@media (max-width:500px) {
+  img {
+    height: 155px
+  }
+
+  .card-modal {
+    padding: .9rem
+  }
+}

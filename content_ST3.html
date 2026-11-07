@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Fashion &amp; Clothing Waste - SDG 12</title>
+    <link rel="stylesheet" href="css/style.css">
+<style>
+
+		/* Content Images */
+		.content-img {
+			display: block; /* It changes how the elements appear */
+			width: 50%;
+			height: 300px;
+			margin: auto;
+        }
+		
+		.content-img-caption {
+            text-align: center;
+            font-size: 15px;
+            font-style: italic;
+        }
+		
+		/* Stat Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+        }
+
+        .stat-card {
+            background-color: var(--surface);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary);
+			margin-left: 5px;
+			margin-right: 5px;
+        }
+
+        .stat-card .stat-number {
+            font-size: 30px;
+            font-weight: 600;
+            color: var(--accent);
+            line-height: 1;
+			margin-bottom: 10px;
+        }
+
+        .stat-card .stat-desc {
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+		
+		/* Highlight Box */
+        .highlight-box {
+            background-color: var(--bg-soft);
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+            padding: 10px;
+			margin-left: 15px;
+			margin-right: 15px;
+        }
+
+        .highlight-box p {
+            color: var(--accent-strong);
+            font-weight: 500;
+            margin: 0;
+			margin-left: 30px;
+        }
+		
+		/* Warning Box */
+        .warning-box {
+            background-color: var(--surface-soft);
+            border-left: 5px solid var(--accent);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+			margin-left: 15px;
+			margin-right: 15px;
+        }
+
+        .warning-box p {
+            color: var(--accent-strong);
+			font-weight: 500;
+            margin: 0;
+			margin-left: 30px;
+        }
+
+        /* Action List */
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .action-list li {
+            padding: 12px 10px 10px 30px;
+            position: relative; /* Moves the element without affecting surrounding layout */
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+			margin-left: 15px;
+			margin-right: 15px;
+        }
+
+        .action-list li:last-child { /* Removes the border line from the last element */
+            border-bottom: none;
+        }
+
+        .action-list li::before {
+            content: "✓";
+            position: absolute; /* Spaces are ignored */
+            left: 10px;
+            color: var(--primary);
+            font-weight: 700;   
+        }
+</style>
+</head>
+
+<body id="top">
+
+	<!--Accessibilitly feature - hidden in normal view-->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="site-branding">
+            <div class="brand-lockup">
+                <a class="site-logo" href="home.html" aria-label="ConsumeRight">
+                    <img src="images/logo.png" alt="logo">
+                </a>
+                <p class="site-title">
+                    <a href="home.html">ConsumeRight</a>
+                    <span>SDG 12: Responsible consumption and production</span>
+                </p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">AIS</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="page-wrap">
+        <div class="layout-body">
+
+            <aside class="sidebar-nav">
+                <p class="sidebar-nav__title">Content pages:</p>
+                <details>
+                    <summary>Student 1 — Responsible shopping</summary>
+                    <div class="sidebar-nav__sub">
+                        <ul>
+                            <li><a href="content_ST_template.html#why-it-matters">Why it matters</a></li>
+                            <li><a href="content_ST_template.html#why-it-matters2">Why it matters</a></li>
+                        </ul>
+                    </div>
+                </details>
+                <details>
+                    <summary>Student 2 — Circular fashion</summary>
+                    <div class="sidebar-nav__sub">
+                        <ul>
+                            <li><a href="content_ST_template.html#why-it-matters">Why it matters</a></li>
+                            <li><a href="content_ST_template.html#why-it-matters2">Why it matters</a></li>
+                        </ul>
+                    </div>
+                </details>
+                <details>
+					<!-- Internal navigation menu -->
+					<summary>Student 3 - Raiqa Abdul Qadir - Fast Fashion &amp; Clothing Waste</summary>
+                    <div class="sidebar-nav__sub">
+                        <ul>
+                            <li><a href="content_ST3.html#fast-fashion">What is Fast Fashion?</a></li>
+                            <li><a href="content_ST3.html#environmental-impact">The Environmental Impact</a></li>
+							<li><a href="content_ST3.html#human-cost">The Human Cost</a></li>
+							<li><a href="content_ST3.html#student-actions">What We Can Do as Students</a></li>
+							<li><a href="content_ST3.html#making-impact">Making an Impact</a></li>
+                        </ul>
+                    </div>
+                </details>
+                <details>
+                    <summary>Student 4 — Greener campus</summary>
+                    <div class="sidebar-nav__sub">
+                        <ul>
+                            <li><a href="content_ST_template.html#why-it-matters">Why it matters</a></li>
+                            <li><a href="content_ST_template.html#why-it-matters2">Why it matters</a></li>
+                        </ul>
+                    </div>
+                </details>
+            </aside>
+
+            <main id="main-content" class="main-content main-content--rich">
+				
+				<!-- Banner -->
+                <section id="intro" class="page-intro">
+                    <h1>Fast Fashion & Clothing Waste</h1>
+                    <p>How what we consume is costing the planet - it’s time to trade fast trends for a lasting future.</p>
+                </section>
+
+				<!-- Section 1: What is Fast Fashion -->
+                <div class="section-stack">
+                    <section id="fast-fashion" class="card card--panel">
+                        <h2>What is Fast Fashion?</h2>
+						
+						<!-- Image 1 -->
+                        <img class="content-img" src="images/FastFashion.jpg" alt="Racks of cheap clothing in a fast fashion retail store">
+						<p class="content-img-caption">Fast fashion produce thousands of new styles every week at rock - bottom prices. (Source: iStockPhoto)</p>
+						
+                        <p>Fast fashion is the rapid production of cheap, trendy clothes designed to be worn and discarded quickly. Instead of traditional seasonal releases, brands like Shein, Zara, and H&M now launch new collections weekly, copying runway trends within days and selling them at extremely low prices made possible by cheap labour. Fueled by social media platforms like TikTok, where trends change overnight, and haul culture thrives, consumers are encouraged to buy more than ever, yet wear each item less, turning fashion into a cycle of constant consumption and waste.</p>
+                        
+                        <div class="highlight-box">
+							<p>Fast fashion is not just an industry - it is a habit we have been sold, one scroll at a time.</p>
+                        </div>
+                    </section>
+
+					<!-- Section 2 : The Environmental Impact -->
+                    <section id="environmental-impact" class="card card--panel">
+                        <h2>The Environmental Impact</h2>
+                        <p>Fast fashion is one of the most environmentally destructive industries on Earth. From raw material production to disposal, every stage of a garment’s life cycle leaves a massive footprint that the planet is struggling to absorb.</p>
+						
+						<!-- 4 Stats cards -->
+						<div class="stats-grid">
+							<div class="stat-card">
+								<div class="stat-number">10%</div>
+								<div class="stat-desc">of the world’s carbon pollution is driven by fashion - an industry built on overproduction and constant consumption</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-number">2,700L</div>
+								<div class="stat-desc">of freshwater is drained to produce a single T-shirt - before it’s even worn once</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-number">92 million tonnes</div>
+								<div class="stat-desc">of clothing is discarded each year - most of it worn only a handful of times</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-number">500,000 tonnes</div>
+								<div class="stat-desc">of invisible plastic fibres flow into oceans annually - released every time clothes are washed</div>
+							</div>
+						</div>
+
+						<div class="warning-box">
+							<p>⚠️ The fashion industry produces more carbon emissions than all international flights and maritime shipping combined - yet nobody talks about it.</p>
+						</div>
+						
+						<!-- Image 2 -->
+						<img class="content-img" src="images/DiscardedClothing.jpg" alt="A large pile of discarded clothing">
+						<p class="content-img-caption">Millions of tonnes of clothing end up in landfill every year, releasing toxic chemicals into the soil and water. (Source: iStockPhoto)</p>
+						
+						
+                    </section>
+					
+					<!-- Section 3 : The Human Cost -->
+					<section id="human-cost" class="card card--panel">
+                        <h2>The Human Cost</h2>
+						
+                        <p>Behind every low price is a hidden reality. Fast fashion depends on millions of workers whose labour is undervalued, underpaid, and often invisible. The true cost isn’t on the price tag - it’s carried by the people making the clothes.</p>
+						
+						<!-- Image 3 -->
+						<img class="content-img" src="images/Workers.jpg" alt="Garment workers sewing clothes in a crowded factory">
+							<p class="content-img-caption">Garment workers with terrible working conditions. (Source: iStockPhoto)</p>
+						
+						<!-- Image 4 -->
+						<img class="content-img" src="images/Protest.jpg" alt="Protesters holding signs calling for fair wages">
+						<p class="content-img-caption">Protesters protesting for fair wages and safer working conditions. (Source: iStockPhoto)</p>
+							
+						
+                        
+                        <div class="inset-block">
+							<h3>Workers</h3><p>Most garment workers are young women, often supporting entire families. Many earn below a living wage, working exhausting hours in tightly controlled environments where even basic breaks are restricted. Long shifts and constant pressure to meet quotas are the standard, not the exception.</p>
+							
+							<h3>Child Labour</h3><p>In some parts of the supply chain, children are still involved in producing raw materials like cotton. Poverty and demand for cheap production push families to rely on child labour, keeping cycles of forced labour alive.</p>
+							
+							<h3>Unfair Pay</h3><p>The gap between workers and executives is extreme. Garment workers are paid just enough to survive - while company leaders earn in days what workers may never see in a lifetime. Speaking out often risks losing their only source of income.</p>
+                        </div>
+                    </section>
+					
+					<!-- Section 4 : What We Can Do as Students -->
+					<section id="student-actions" class="card card--panel">
+                        <h2>What We Can Do as Students</h2>
+                        <p>The fashion industry wants you to believe that change starts in boardrooms and government offices - but it doesn't. It starts in your wardrobe, your campus and your daily choices. As students we are one of the most targeted groups by fast fashion brands, which means we also have enormous power to push back.</p>
+						
+						<strong>"Small choices in your wardrobe can create global impact."</strong>
+						
+						<h3>Practical Actions You Can Take Today</h3>
+						<ul class="action-list">
+							<li>Shop second-hand - explore charity shops, vintage stores, or apps</li>
+							<li>Take part in a Campus Swap Shop - exchange clothes, books, or items with others instead of buying new</li>
+							<li>Buy less, choose better - focus on quality pieces you’ll wear more often</li>
+							<li>Wash smarter - lower temperatures and less frequent washing save energy and protect clothes</li>
+							<li>Repair and reuse - simple fixes can extend the life of your clothes</li>
+							<li>Donate instead of dumping - give unwanted items a second life</li>
+							<li>Be curious - research brands and support those with ethical practices</li>
+							<li>Speak up - raise awareness and start conversations in your community</li>
+						</ul>
+                        
+                        <div class="highlight-box">
+							<p>The hands that make our clothes are often the ones paid the least - while the industry profits the most.</p>
+						</div>
+					</section>
+					
+					<!-- Section 5 : Making an impact -->
+					<section id="making-impact" class="card card--panel">
+                        <h2>Making an Impact</h2>
+                        <p>Change does not require perfection. It requires participation. Every single choice you make as a consumer sends a signal to the fashion industry about what you value and right now, millions of students around the world are sending that signal loud and clear.</p>
+						
+						<h3>The Power of Collective Action</h3>
+						
+						<p>When people unite around shared goals, change happens faster. Groups, online communities, and local initiatives are promoting swaps, repairs, and sustainable policies.</p>
+						
+						<p>Fashion brands are starting to respond with recycling programs, sustainable materials, and supply chain transparency. Every choice - buying second-hand, quality items, or ethical brands - sends a strong message: you support a fashion industry that values people and the planet.</p>
+						
+						<div class="highlight-box">
+							<p>The fashion industry follows trends - but consumers create them.</p>
+						</div>
+					</section>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="to-top"><a href="#top">Go to top</a></div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>ConsumeRight</strong>
+                <p>Group 1 - Sub-group 2</p>
+                <p>SDG 12: Responsible consumption and production</p>
+            </div>
+            <nav class="footer-docs">
+                <div>
+                    <h3>Page editors</h3>
+                    <ul>
+                        <li><a href="pageEditor_ST1.html">Safiya Nazly — Page Editor</a></li>
+                        <li><a href="pageEditor_ST2.html">Lakna Dasuni — Page Editor</a></li>
+                        <li><a href="pageEditor_ST3.html">Raiqa Abdul Qadir — Page Editor</a></li>
+                        <li><a href="pageEditor_ST4.html">Aamina Rifas — Page Editor</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Validation</h3>
+                    <ul>
+                        <li><a href="validation_ST1.html">Safiya Nazly — Validation</a></li>
+                        <li><a href="validation_ST2.html">Lakna Dasuni — Validation</a></li>
+                        <li><a href="validation_ST3.html">Raiqa Abdul Qadir — Validation</a></li>
+                        <li><a href="validation_ST4.html">Aamina Rifas — Validation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Quick links</h3>
+                    <ul>
+                        <li><a href="splash.html">Intro splash</a></li>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="Compliance.pdf">Janet Compliance </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <p>Web Design &amp; Development Coursework · Group 1 - Sub-group 2</p>
+        </div>
+    </footer>
+</body>
+
+</html>

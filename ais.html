@@ -1,0 +1,539 @@
+<!--ONLY HEADER AND FOOTER HERE, INSERT CONETENT HERE -->
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Template · Responsible Tomorrow</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* 1. Action cards grid layout */
+    /* Action cards — strict 3-column grid (3x3) */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Responsive: 2 cols on tablet, 1 col on mobile */
+    @media (max-width: 900px) {
+      .action-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .action-grid { grid-template-columns: 1fr; }
+    }
+
+    /* 2. Individual action card styling */
+    .action-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+      overflow: hidden;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    /* 3. Hover state — visual indication of interactivity */
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
+
+    /* 4. Selected card state — highlighted with primary colour border */
+    .action-card.selected {
+      border-color: #c17f24;
+      background: #fdf6ec;
+      box-shadow: 0 6px 24px rgba(193,127,36,0.3);
+    }
+
+    /* Tick badge shown when selected */
+    .action-card.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: #c17f24;
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* 5. Card image area */
+    .action-card img {
+      width: 100%;
+      height: 155px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Card text body */
+    .action-card .card-info {
+      padding: 1rem 1.1rem 1.2rem;
+    }
+    .action-card .card-info h2 {
+      font-size: 1rem;
+      color: #2d6a4f;
+      margin-bottom: 0.3rem;
+    }
+    .action-card .card-info p {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+
+    /* Impact points badge */
+    .impact-badge {
+      display: inline-block;
+      background: #2d6a4f;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Feedback / Results Area */
+    .feedback-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-bottom: 2rem;
+      transition: background 0.4s ease;
+    }
+    .feedback-box h2 { margin-bottom: 0.5rem; }
+    .impact-score {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #c17f24;
+      line-height: 1;
+      margin: 0.4rem 0;
+    }
+    .impact-level-badge {
+      display: inline-block;
+      padding: 0.4rem 1.4rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    .level-low    { background: #ffd6d6; color: #c0392b; }
+    .level-medium { background: #fff3cd; color: #856404; }
+    .level-high   { background: #d4edda; color: #155724; }
+
+    .impact-message { font-size: 1rem; color: #555; max-width: 480px; margin: 0 auto 1.2rem; }
+
+    /* Reset button */
+    .btn-reset {
+      background: transparent;
+      border: 2px solid #c17f24;
+      color: #c17f24;
+      padding: 0.55rem 1.6rem;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-reset:hover { background: #c17f24; color: #fff; }
+
+    /* Page body background — changes with impact level */
+    body.bg-low    { background-image: url('images/low.jpg'); background-size: cover; background-attachment: fixed; }
+    body.bg-medium { background-image: url('images/medium.jpg'); background-size: cover; background-attachment: fixed; }
+    body.bg-high   { background-image: url('images/high.jpg'); background-size: cover; background-attachment: fixed; }
+
+    /* Overlay so content stays readable over background image */
+    body.bg-low main, body.bg-medium main, body.bg-high main {
+      background: rgba(253,246,236,0.0);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+
+    /* Instruction text */
+    .instruction {
+      text-align: center;
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+      font-style: italic;
+    }
+	.page-hero {
+	  background: rgba(30, 70, 50, 0.9);
+      border-radius: 18px;
+      padding: 2.5rem 2.5rem 2rem;
+      max-width: 1160px;
+      margin: 0rem auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+	}
+	  
+    /* Background content box — matches the dark green rounded box in the design */
+    .content-box {
+      background: rgba(30, 70, 50, 0.5);
+      border-radius: 18px;
+      padding: 2.5rem 2.5rem 2rem;
+      max-width: 1160px;
+      margin: 2rem auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    }
+
+    /* Lighten text inside box to stay readable on dark background */
+    .content-box .page-hero h1 { color: #fff; }
+    .content-box .page-hero p  { color: #dde8e2; }
+    .content-box .instruction  { color: #cde0d6; }
+  </style>
+</head>
+
+<body id="top">
+
+  <!--Accessibilitly feature - hidden in noraml view-->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-branding">
+      <div class="brand-lockup">
+        <a class="site-logo" href="home.html" aria-label="Responsible Tomorrow home">
+          <img src="images/logo.png" alt="logo">
+        </a>
+        <p class="site-title">
+          <a href="home.html">Responsible Tomorrow</a>
+          <span>SDG 12: Responsible consumption and productiont</span>
+        </p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html" class="active">AIS</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <main id="main-content">
+  <div class="content-box">
+
+  <div class="page-hero" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <h1>Action Impact Simulator</h1>
+      <p>Select the actions you already take — or could start taking — and discover your personal impact on responsible consumption.</p>
+    </div>
+
+    <p class="instruction">Click the cards below to select your actions. Your impact score will update automatically.</p>
+
+    <!-- Nine Action Cards (3 x 3 grid) -->
+    <!--
+      Each card has a data-points attribute (1-5).
+      JavaScript reads these to calculate the total impact score.
+
+      IMPACT LEVEL THRESHOLDS (defined by Student 2):
+        Low    = 0-5  points
+        Medium = 6-11 points
+        High   = 12+  points
+    -->
+	
+    <section class="action-grid" aria-label="Action cards — click to select">
+
+      <!-- Card 1 -->
+      <article class="action-card" data-points="3">
+        <div role="button" tabindex="0" aria-pressed="false"
+             aria-label="Reduce food waste — 3 impact points">
+          <img src="images/card1.jpg"
+               alt="A plate of healthy food with minimal waste">
+          <div class="card-info">
+            <h2>Reduce Food Waste</h2>
+            <p>Plan meals, use leftovers, and compost scraps to dramatically cut household food waste.</p>
+            <span class="impact-badge">Impact points: 3</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="action-card" data-points="2">
+        <div role="button" tabindex="0" aria-pressed="false"
+             aria-label="Use public transport — 2 impact points">
+          <img src="images/card2.jpg"
+               alt="A bus on a city street representing public transport">
+          <div class="card-info">
+            <h2>Use Public Transport</h2>
+            <p>Swap one car journey per week for a bus or train to reduce your carbon footprint.</p>
+            <span class="impact-badge">Impact points: 2</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="action-card" data-points="4">
+        <div role="button" tabindex="0" aria-pressed="false"
+             aria-label="Buy second-hand — 4 impact points">
+          <img src="images/card3.jpg"
+               alt="Second-hand clothes hanging on a rail in a charity shop">
+          <div class="card-info">
+            <h2>Buy Second-Hand</h2>
+            <p>Choose pre-owned clothes, electronics, and furniture to extend product lifespans and cut demand for new manufacturing.</p>
+            <span class="impact-badge">Impact points: 4</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="action-card" data-points="4">
+        <div role="button" tabindex="0" aria-pressed="false"
+             aria-label="Volunteer locally — 4 impact points">
+          <img src="images/card4.jpg"
+               alt="People volunteering together in a community project">
+          <div class="card-info">
+            <h2>Volunteer Locally</h2>
+            <p>Give time to a local SDG-aligned initiative such as a repair café, community garden, or food bank.</p>
+            <span class="impact-badge">Impact points: 4</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="action-card" data-points="3">
+        <div role="button" tabindex="0" aria-pressed="false"
+             aria-label="Conserve energy at home — 3 impact points">
+          <img src="images/card5.jpg"
+               alt="A glowing energy-efficient light bulb">
+          <div class="card-info">
+            <h2>Conserve Energy at Home</h2>
+            <p>Turn off unused devices, switch to LED bulbs, and reduce heating where possible to lower your energy use.</p>
+            <span class="impact-badge">Impact points: 3</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="action-card" data-points="1">
+        <div role="button" tabindex="0" aria-pressed="false"
+             aria-label="Share awareness — 1 impact point">
+          <img src="images/card6.jpg"
+               alt="A person holding a megaphone representing social media awareness">
+          <div class="card-info">
+            <h2>Share Awareness</h2>
+            <p>Encourage others by sharing one actionable tip about responsible consumption on social media each week.</p>
+            <span class="impact-badge">Impact points: 1</span>
+          </div>
+        </div>
+      </article>
+
+
+    </section>
+
+    <!-- Feedback Summary Box -->
+    <section class="feedback-box" id="feedback-box" aria-live="polite" aria-label="Impact summary">
+      <h2>Your Impact Summary</h2>
+      <div class="impact-score" id="score-display">0</div>
+      <div>points</div>
+      <br>
+      <span class="impact-level-badge level-low" id="level-badge">Low Impact</span>
+      <p class="impact-message" id="impact-message">
+        Select some actions above to see your personal impact score!
+      </p>
+      <!-- Reset button -->
+      <button class="btn-reset" id="reset-btn" aria-label="Reset all selections">Reset</button>
+    </section>
+
+  </div><!-- /.content-box -->
+  </main>
+
+
+  
+
+  <div class="to-top"><a href="#top">Go to top</a></div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Responsible Tomorrow</strong>
+        <p>Group 1 - Sub-group 2</p>
+        <p>SDG 12 : Responsible consumption and production</p>
+      </div>
+      <nav class="footer-docs">
+        <div>
+          <h3>Page editors</h3>
+          <ul>
+            <li><a href="pageEditor_ST1.html">Safiya Nazly — Page Editor</a></li>
+            <li><a href="pageEditor_ST2.html">Lakna Dasuni — Page Editor</a></li>
+            <li><a href="pageEditor_ST3.html">Raiqa Abdul Qadir — Page Editor</a></li>
+            <li><a href="pageEditor_ST4.html">Aamina Rifas — Page Editor</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Validation</h3>
+          <ul>
+            <li><a href="validation_ST1.html">Safiya Nazly — Validation</a></li>
+            <li><a href="validation_ST2.html">Lakna Dasuni — Validation</a></li>
+            <li><a href="validation_ST3.html">Raiqa Abdul Qadir — Validation</a></li>
+            <li><a href="validation_ST4.html">Aamina Rifas — Validation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="splash.html">Intro splash</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="Compliance.pdf">Janet Compliance </a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>Web Design &amp; Development Coursework · Group 1 - Sub-group 2</p>
+    </div>
+  </footer>
+  
+  <!-- ============================================================
+       JavaScript — Action Impact Simulator Logic
+
+       IMPACT LEVEL THRESHOLDS:
+         Low    = 0 - 5  points  background image A (barren/dry)
+         Medium = 6 - 11 points  background image B (recycling)
+         High   = 12+    points  background image C (green nature)
+       ============================================================ -->
+  <script>
+    // Store all card elements and total score
+    const cards      = document.querySelectorAll('.action-card');
+    const scoreEl    = document.getElementById('score-display');
+    const levelBadge = document.getElementById('level-badge');
+    const messageEl  = document.getElementById('impact-message');
+    const resetBtn   = document.getElementById('reset-btn');
+
+    let totalScore = 0;  // Running total of selected points
+
+    // Messages for each impact level
+    const levels = {
+      low: {
+        label:   'Low Impact',
+        cssClass:'level-low',
+        message: 'Every journey starts with a single step! Try selecting more actions to boost your impact.',
+        bgClass: 'bg-low'
+      },
+      medium: {
+        label:   'Medium Impact',
+        cssClass:'level-medium',
+        message: 'Good progress! You are making a real difference. Keep going — more actions mean a greater impact.',
+        bgClass: 'bg-medium'
+      },
+      high: {
+        label:   'High Impact',
+        cssClass:'level-high',
+        message: 'Excellent commitment! You are a champion of responsible consumption. Consider sharing these actions with others.',
+        bgClass: 'bg-high'
+      }
+    };
+
+    // Determine impact level from score
+    // Thresholds: Low 0-5 | Medium 6-11 | High 12+
+    function getLevel(score) {
+      if (score >= 12) return 'high';
+      if (score >= 6)  return 'medium';
+      return 'low';
+    }
+
+    // Update the feedback box and background image
+    function updateFeedback() {
+      scoreEl.textContent = totalScore;
+
+      const lvl  = getLevel(totalScore);
+      const data = levels[lvl];
+
+      // Update badge text and colour class
+      levelBadge.textContent = data.label;
+      levelBadge.className   = 'impact-level-badge ' + data.cssClass;
+
+      // Update summary message
+      messageEl.textContent = totalScore === 0
+        ? 'Select some actions above to see your personal impact score!'
+        : data.message;
+
+      // Change page background image based on level (JavaScript-controlled)
+      document.body.classList.remove('bg-low', 'bg-medium', 'bg-high');
+      if (totalScore > 0) {
+        document.body.classList.add(data.bgClass);
+      }
+    }
+
+    // Handle card click / keyboard selection
+    // Target the inner div[role="button"] for toggle logic
+    function toggleCard(card) {
+      const btn     = card.querySelector('[role="button"]');
+      const points  = parseInt(card.getAttribute('data-points'), 10);
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+
+      if (pressed) {
+        // Deselect
+        card.classList.remove('selected');
+        btn.setAttribute('aria-pressed', 'false');
+        totalScore -= points;
+      } else {
+        // Select
+        card.classList.add('selected');
+        btn.setAttribute('aria-pressed', 'true');
+        totalScore += points;
+      }
+
+      // Ensure score never goes below 0 (safety guard)
+      if (totalScore < 0) totalScore = 0;
+
+      updateFeedback();
+    }
+
+    // Attach click listener to each card
+    cards.forEach(function (card) {
+      const btn = card.querySelector('[role="button"]');
+
+      // Mouse click
+      btn.addEventListener('click', function () {
+        toggleCard(card);
+      });
+
+      // Keyboard: Enter or Space activates the card (accessibility)
+      btn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleCard(card);
+        }
+      });
+    });
+
+    // Reset button — deselect all cards
+    resetBtn.addEventListener('click', function () {
+      cards.forEach(function (card) {
+        const btn = card.querySelector('[role="button"]');
+        card.classList.remove('selected');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      totalScore = 0;
+      document.body.classList.remove('bg-low', 'bg-medium', 'bg-high');
+      updateFeedback();
+    });
+
+    // Initialise feedback display on page load
+    updateFeedback();
+  </script>
+</body>
+</html>

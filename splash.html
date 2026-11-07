@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- AUTO REDIRECT to home.html after 4 seconds -->
+  <meta http-equiv="refresh" content="4; url=home.html" />
+
+  <title>SDG 12 — Responsible Consumption</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---- Splash Screen Styles ---- */
+
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Full-screen background */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lato', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+      background: #1a1a1a;
+    }
+
+    /* Background image with dark overlay */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url('images/high.jpg') center/cover no-repeat;
+      z-index: 0;
+      animation: bgZoom 4s ease forwards;
+    }
+    /* Gradient overlay for readability */
+    .bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(20,50,30,0.82) 0%, rgba(10,10,10,0.88) 100%);
+    }
+
+    /* Slow zoom on background */
+    @keyframes bgZoom {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1); }
+    }
+
+    /* Main content container */
+    .splash-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 720px;
+      padding: 2.5rem 2rem;
+      animation: fadeUp 0.9s ease 0.3s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SDG Badge */
+    .sdg-badge {
+      display: inline-block;
+      background: #c17f24;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Site title */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+    h1 span { color: #f4a261; }
+
+    /* Mission statement */
+    .mission {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* Group members list */
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2.2rem;
+    }
+    .team-member {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 0.35rem 1rem;
+      font-size: 0.88rem;
+      color: #fff;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Countdown display */
+    .countdown-wrap {
+      margin-bottom: 1.8rem;
+    }
+    .countdown-label {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+    }
+    #countdown-text {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f4a261;
+    }
+
+    /* CSS Loader animation */
+    .loader {
+      width: 52px;
+      height: 52px;
+      border: 5px solid rgba(255,255,255,0.2);
+      border-top-color: #c17f24;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Skip button */
+    .skip-btn {
+      display: inline-block;
+      padding: 0.65rem 2rem;
+      border: 2px solid rgba(255,255,255,0.6);
+      border-radius: 30px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      background: transparent;
+      text-decoration: none;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .skip-btn:hover {
+      background: #c17f24;
+      border-color: #c17f24;
+      color: #fff;
+    }
+
+    /* Decorative bottom text */
+    .bottom-bar {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      z-index: 1;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background image layer -->
+  <div class="bg" role="img" aria-label="Recycling and sustainable products background"></div>
+
+  <!-- Main splash content -->
+  <div class="splash-content">
+
+    <!-- SDG label -->
+    <div class="sdg-badge">UN SDG Goal 12</div>
+
+    <!-- Website title -->
+    <h1>Consume <span>Wisely</span>,<br>Live Sustainably</h1>
+
+    <!-- Mission statement -->
+    <p class="mission">
+      Empowering individuals and communities to rethink how we produce, use,
+      and discard — because every choice shapes the future of our planet.
+    </p>
+
+    <!-- Group members -->
+	
+	<!--
+    <div class="team-list" role="group" aria-label="Group members">
+      <span class="team-member">Student 1</span>
+      <span class="team-member">Student 2</span>
+      <span class="team-member">Student 3</span>
+      <span class="team-member">Student 4</span>
+    </div>
+	-->
+	
+	<div class="team-list" role="group" aria-label="Group members">
+      <span class="team-member">Student 1 <br>Safiya Nazly</span>
+      <span class="team-member">Student 2 <br>lakna Dasuni</span>
+      <span class="team-member">Student 3 <br>Raiqa Quadir</span>
+      <span class="team-member">Student 4 <br>Aamina Rifas</span>
+    </div>
+
+    <!-- CSS Loader -->
+    <div class="loader" aria-hidden="true"></div>
+
+    <!-- Countdown timer -->
+    <div class="countdown-wrap">
+      <div class="countdown-label">Entering site in</div>
+      <div id="countdown-text" aria-live="polite">4</div>
+    </div>
+
+    <!-- Skip button -->
+    <button class="skip-btn" id="skip-btn" aria-label="Skip intro and go to home page">
+      Skip Intro →
+    </button>
+
+  </div>
+
+  <!-- Bottom attribution bar -->
+  <div class="bottom-bar">University of Westminster &nbsp;|&nbsp; Web Design & Development 2025/26</div>
+
+  <!-- ============================================================
+       JavaScript: Countdown timer + Skip button
+       ============================================================ -->
+  <script>
+    // Countdown timer — updates every second
+    let seconds = 4;
+    const countdownEl = document.getElementById('countdown-text');
+
+    const timer = setInterval(function () {
+      seconds--;
+      countdownEl.textContent = seconds;
+
+      // When countdown reaches 0, redirect immediately
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = 'home.html';
+      }
+    }, 1000);
+
+    // Skip button — go to home page immediately, cancel the timer
+    const skipBtn = document.getElementById('skip-btn');
+    skipBtn.addEventListener('click', function () {
+      clearInterval(timer);         // cancel the auto-redirect timer
+      window.location.href = 'home.html';
+    });
+  </script>
+
+</body>
+</html>

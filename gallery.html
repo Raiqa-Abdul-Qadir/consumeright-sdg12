@@ -1,0 +1,647 @@
+<!--ONLY HEADER AND FOOTER HERE, INSERT CONETENT HERE -->
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery · ConsumeRight</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /*THUMBNAIL CARD*/
+
+    .thumbnail {
+      flex: 0 0 180px;
+      overflow: hidden;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+    }
+
+    .thumbnail:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+
+    .thumbnail-img {
+      position: relative;
+      overflow: hidden;
+      height: 150px;
+    }
+
+    .thumbnail-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 0;
+      border: none;
+      transition: transform .35s ease;
+    }
+
+    .thumbnail:hover .thumbnail-img img,
+    .thumbnail:focus-visible .thumbnail-img img {
+      transform: scale(1.06);
+    }
+
+    /*thumbnail overlay*/
+
+    .thumbnail-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(43, 86, 117, .88) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: .6rem .65rem;
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events: none;
+    }
+
+    .thumbnail-overlay.visible {
+      opacity: 1;
+    }
+
+    .thumbnail-overlay p {
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: .8rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .thumbnail-holder {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: .85rem;
+      padding: .5rem .25rem 1rem;
+      align-items: center;
+    }
+
+    /*POPOUT*/
+
+    .popout-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 900px;
+      max-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      transform: translateY(20px) scale(.97);
+      transition: transform .3s cubic-bezier(.22, .88, .34, 1.02);
+      position: relative;
+    }
+
+    .popout-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(24, 40, 55, .6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .popout-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Close button */
+    .modal-close {
+      position: absolute;
+      top: .75rem;
+      right: .75rem;
+      z-index: 10;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+
+    .modal-close:hover {
+      background: #fce8e8;
+      border-color: #e0a0a0;
+      color: #a33;
+    }
+
+    .modal-close:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+
+
+    /*Content*/
+    .popout-right {
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .popout-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 0;
+      border: none;
+    }
+
+    .popout-left {
+      padding: 2rem 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      max-height: 88vh;
+      background: var(--surface);
+      transition: background .25s ease;
+    }
+
+    .popout-left h2,
+    p {
+      transition: font-family .2s;
+    }
+
+
+    /*Controls */
+    .controls {
+      border-top: 1px solid var(--border);
+      padding-top: .85rem;
+      margin-top: auto;
+    }
+
+    .inner-controls {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+      margin-bottom: .4rem;
+    }
+
+
+    /*Button settings*/
+    .btn-controls {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--primary-strong);
+      font-family: var(--font-body);
+      font-size: .77rem;
+      padding: .34rem .7rem;
+      cursor: pointer;
+      transition: background .18s, border-color .18s;
+      font-weight: 600;
+    }
+
+    .btn-controls:hover {
+      background: var(--bg-soft);
+      border-color: var(--primary);
+    }
+
+    .btn-controls.btn-active {
+      background: linear-gradient(120deg, var(--primary), var(--accent));
+      color: #fff;
+      border-color: transparent;
+    }
+
+
+
+    /*Color Schemes*/
+    .popout-left.scheme-highContrast {
+      background: #000;
+      color: #FFD523;
+      border: 2px solid #FFD523;
+    }
+
+    .popout-left.scheme-darkMode {
+      background: #1a1a2e;
+      color: #e0e0e0;
+    }
+
+    .popout-left.scheme-darkMode h2,
+    .popout-left.scheme-darkMode p,
+    .popout-left.scheme-highContrast h2,
+    .popout-left.scheme-highContrast p {
+      color: inherit;
+    }
+
+    /*Font Styles*/
+    .popout-left.font-dyslexiaFriendly {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    .popout-left.font-monospace {
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .popout-left.font-dyslexiaFriendly h2,
+    .popout-left.font-dyslexiaFriendly p,
+    .popout-left.font-monospace h2,
+    .popout-left.font-monospace p {
+      font-family: inherit;
+    }
+
+    @media (max-width:660px) {
+      .popout-left {
+        min-height: 190px;
+        max-height: 220px;
+      }
+
+      .popout-right {
+        max-height: calc(92vh - 220px);
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!--Accessibilitly feature - hidden in noraml view-->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-branding">
+      <div class="brand-lockup">
+        <a class="site-logo" href="home.html" aria-label="ConsumeRight home">
+          <img src="images/logo.png" alt="logo">
+        </a>
+        <p class="site-title">
+          <a href="home.html">ConsumeRight</a>
+          <span>SDG 12: Responsible consumption and productiont</span>
+        </p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a class="active" href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html">AIS</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <div class="page-wrap">
+    <div class="layout-body layout-body--single">
+      <main id="main-content" class="main-content">
+
+        <section class="card page-intro">
+          <h1>Gallery</h1>
+
+          <!--Gallery strip thumbnails-->
+          <div class="thumbnail-holder" role="list">
+
+            <!--thumbnail 1 :The Plastic Crisis -->
+            <div class="card card--interactive thumbnail" role="listitem" tabindex="0" data-id="1"
+              aria-label="Open: The Plastic Crisis">
+              <div class="thumbnail-img">
+                <img src="images/gallery/gallery_pic1.jpg"
+                  alt="A devestating shot of plastic waste in the ocean. Water Pollution.">
+                <div class="thumbnail-overlay" aria-hidden="true">
+                  <p>The Plastic Crisis</p>
+                </div>
+              </div>
+            </div>
+
+            <!--thumbnail 2 : Global Food Loss & Waste -->
+            <div class="card card--interactive thumbnail" role="listitem" tabindex="0" data-id="2"
+              aria-label="Open: Global Food Loss & Waste">
+              <div class="thumbnail-img">
+                <img src="images/gallery/gallery_pic2.jpg"
+                  alt="Expired Organic bio waste. Mix Vegetables and fruits in a huge container, in a rubbish bin.">
+
+                <div class="thumbnail-overlay" aria-hidden="true">
+                  <p>Global Food Loss & Waste</p>
+                </div>
+              </div>
+            </div>
+
+            <!--thumbnail 3 : Fast Fashion's True Cost-->
+            <div class="card card--interactive thumbnail" role="listitem" tabindex="0" data-id="3"
+              aria-label="Open: Fast Fashion's True Cost">
+              <div class="thumbnail-img">
+                <img src="images/gallery/gallery_pic3.jpg"
+                  alt="A worker walking between the heaps of thrown out clothes">
+                <div class="thumbnail-overlay" aria-hidden="true">
+                  <p>Fast Fashion's True Cost</p>
+                </div>
+              </div>
+            </div>
+
+            <!--thumbnail 4 : The E-Waste Emergency-->
+            <div class="card card--interactive thumbnail" role="listitem" tabindex="0" data-id="4"
+              aria-label="Open: The E-Waste Emergency">
+              <div class="thumbnail-img">
+                <img src="images/gallery/gallery_pic4.jpg" alt="Out-dated electrical waste">
+                <div class="thumbnail-overlay" aria-hidden="true">
+                  <p>The E-Waste Emergency</p>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+
+
+  <!--POP OUT CARDS TEMPLATE-->
+  <div class="card popout-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <div class="popout-box">
+
+      <button class="modal-close" id="modalClose" aria-label="Close gallery item">&#10005;</button>
+
+
+      <!-- RIGHT : Image-->
+      <div class="popout-right">
+        <img id="modalImage" src="#" alt="">
+      </div>
+
+
+      <!--LEFT : texts and controls-->
+      <div class="card popout-left" id="modalContentSide">
+
+        <h2 id="modalTitle">&nbsp;</h2>
+        <p id="modalDesc"></p>
+
+        <!--Controls settings-->
+        <div class="card controls">
+          <span>Customise view:</span>
+
+          <!--Color scheme controls-->
+          <div class="inner-controls" role="group" aria-label="Color scheme">
+            <button class="btn-controls btn-active" data-scheme="">Default color scheme</button>
+            <button class="btn-controls" data-scheme="highContrast">High-contrast</button>
+            <button class="btn-controls" data-scheme="darkMode">Dark mode</button>
+          </div>
+
+          <!--font controls-->
+          <div class="inner-controls" role="group" aria-label="Font">
+            <button class="btn-controls btn-active" data-font="">Default font</button>
+            <button class="btn-controls" data-font="dyslexiaFriendly">Dyslexia friendly</button>
+            <button class="btn-controls" data-font="monospace">Monospace</button>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="to-top"><a href="#top">Go to top</a></div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>ConsumeRight</strong>
+        <p>Group 1 - Sub-group 2</p>
+        <p>SDG 12 : Responsible consumption and production</p>
+      </div>
+      <nav class="footer-docs">
+        <div>
+          <h3>Page editors</h3>
+          <ul>
+            <li><a href="pageEditor_ST1.html">Safiya Nazly — Page Editor</a></li>
+            <li><a href="pageEditor_ST2.html">Lakna Dasuni — Page Editor</a></li>
+            <li><a href="pageEditor_ST3.html">Raiqa Abdul Qadir — Page Editor</a></li>
+            <li><a href="pageEditor_ST4.html">Aamina Rifas — Page Editor</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Validation</h3>
+          <ul>
+            <li><a href="validation_ST1.html">Safiya Nazly — Validation</a></li>
+            <li><a href="validation_ST2.html">Lakna Dasuni — Validation</a></li>
+            <li><a href="validation_ST3.html">Raiqa Abdul Qadir — Validation</a></li>
+            <li><a href="validation_ST4.html">Aamina Rifas — Validation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="splash.html">Intro splash</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="Compliance.pdf">Janet Compliance </a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>Web Design &amp; Development Coursework · Group 1 - Sub-group 2</p>
+    </div>
+  </footer>
+
+
+  <!--JAVA SCRIPT-->
+  <script>
+
+    /* ── 1. Gallery data ─────────────────────────────────────────────
+       Items are indexed 1–4 to match the data-id values on each thumbnail.
+       desc → placeholder lorem ipsum; replace with your own copy.
+    ── */
+    var galleryData = {
+      1: {
+        src: "images/gallery/gallery_pic1.jpg",
+        alt: "Image of plastic waste in the ocean.",
+        title: "The Plastic Crisis",
+        desc: "Since the 1950s, humanity has produced approximately 9.2 billion tonnes of plastic, of which around 7 billion tonnes has become waste. The core problem is not inadequate recycling — it is production volume. Global plastic output has doubled in the last two decades and is projected to double again by 2040. Most plastic is designed for single use — packaging discarded within minutes — yet the material persists in the environment for hundreds of years. The ocean contamination is now extensive: 11 million tonnes of plastic flows into the sea each year, and microplastics — fragments under 5mm — have been detected in human blood, breast milk, and lung tissue."
+
+      },
+      2: {
+        src: "images/gallery/gallery_pic2.jpg",
+        alt: "Expired organic bio waste. Mix vegetables and fruits in a rubbish bin.",
+        title: "Global Food Loss & Waste",
+        desc: "Around 1.3 billion tonnes of food is lost or wasted every year — approximately one third of all food produced for human consumption. In high-income countries, the majority of waste occurs at the retail and consumer end: supermarkets rejecting cosmetically imperfect produce, households discarding food past its best-before date, restaurants preparing more than is sold. In lower-income countries, losses are concentrated earlier in the supply chain — crops spoil in transit due to inadequate cold storage, or at the farm gate because prices fall below the cost of harvest. The climate cost of this waste is severe: every discarded item of food carries the full carbon cost of its production, and food decomposing in landfill produces methane — a greenhouse gas with 80 times the warming potential of CO₂ over a 20-year period."
+      },
+      3: {
+        src: "images/gallery/gallery_pic3.jpg",
+        alt: "A worker walking between heaps of thrown out clothes.",
+        title: "Fast Fashion's True Cost",
+        desc: "The fashion industry produces between 92 and 100 million tonnes of textile waste per year. Fast fashion — a model built on rapidly producing large volumes of low-cost, trend-driven clothing — has compressed fashion cycles from two seasons a year to as many as 52 micro-seasons, drastically shortening garment lifespans. The average item is now worn approximately 7 times before disposal, down 36% from 15 years ago. At the production level, a single pair of jeans requires an estimated 7,500 - 10,000 litres of water, and synthetic fibres — now the most commonly used textile material globally — are fossil fuel derivatives that shed microplastic fibres into waterways with every wash cycle."
+      },
+      4: {
+        src: "images/gallery/gallery_pic4.jpg",
+        alt: "Out-dated electrical waste.",
+        title: "The E-Waste Emergency",
+        desc: "In 2022, the world generated 62 million tonnes of e-waste — the equivalent of 107,000 jumbo jets by weight — representing an 82% increase over the past decade. Of this, only 22.3% was formally collected and recycled. The remainder ends up in landfill or is processed informally, primarily by workers in low-income countries who dismantle electronics by hand and are exposed to lead, mercury, cadmium, and brominated flame retardants. At the same time, discarded devices contain significant quantities of recoverable precious metals: gold, silver, copper, and palladium — materials whose primary mining carries its own severe environmental costs. The materials embedded in 2022 e-waste were estimated to be worth $91.5 billion USD."
+      }
+    };
+
+
+    /* ── 2. Element references ───────────────────────────────────── */
+    var overlay = document.getElementById("modalOverlay");
+    var modalClose = document.getElementById("modalClose");
+    var modalImage = document.getElementById("modalImage");
+    var modalTitle = document.getElementById("modalTitle");
+    var modalDesc = document.getElementById("modalDesc");
+    var contentSide = document.getElementById("modalContentSide");
+    var thumbCards = document.querySelectorAll(".thumbnail");
+    var schemeBtns = document.querySelectorAll("[data-scheme]");
+    var fontBtns = document.querySelectorAll("[data-font]");
+
+    /*active controls*/
+    var currentScheme = "";
+    var currentFont = "";
+
+
+    /* ── 3. Open modal ───────────────────────────────────────────── */
+    function openModal(id) {
+      var item = galleryData[id];
+      if (!item) return;
+
+      /* Fill modal content */
+      modalImage.src = item.src;
+      modalImage.alt = item.alt;
+      modalTitle.textContent = item.title;
+      modalDesc.textContent = item.desc;
+
+
+      /* Re-apply active scheme and font */
+      applyScheme(currentScheme);
+      applyFont(currentFont);
+
+      /* Show the overlay */
+      overlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      modalClose.focus();
+    }
+
+
+    /* ── 4. Close modal ──────────────────────────────────────────── */
+    function closeModal() {
+      overlay.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+
+    /* ── 5. Colour scheme ────────────────────────────────────────── */
+    function applyScheme(scheme) {
+      contentSide.classList.remove("scheme-highContrast", "scheme-darkMode");
+      if (scheme) contentSide.classList.add("scheme-" + scheme);
+      currentScheme = scheme;
+
+      schemeBtns.forEach(function (btn) {
+        var isActive = btn.dataset.scheme === scheme;
+        btn.classList.toggle("btn-active", isActive);
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+    }
+
+
+    /* ── 6. Font style ───────────────────────────────────────────── */
+    function applyFont(font) {
+      contentSide.classList.remove("font-dyslexiaFriendly", "font-monospace");
+      if (font) contentSide.classList.add("font-" + font);
+      currentFont = font;
+
+      fontBtns.forEach(function (btn) {
+        var isActive = btn.dataset.font === font;
+        btn.classList.toggle("btn-active", isActive);
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+    }
+
+
+    /* ── 7. Thumbnail event listeners ────────────────────────────── */
+    thumbCards.forEach(function (card) {
+
+      /* Click → open modal */
+      card.addEventListener("click", function () {
+        openModal(parseInt(this.dataset.id, 10));
+      });
+
+      /* Enter / Space → open modal (keyboard access) */
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(parseInt(this.dataset.id, 10));
+        }
+      });
+
+      /* Hover / focus → show title overlay */
+      card.addEventListener("mouseenter", function () {
+        this.querySelector(".thumbnail-overlay").classList.add("visible");
+      });
+      card.addEventListener("mouseleave", function () {
+        this.querySelector(".thumbnail-overlay").classList.remove("visible");
+      });
+      card.addEventListener("focus", function () {
+        this.querySelector(".thumbnail-overlay").classList.add("visible");
+      });
+      card.addEventListener("blur", function () {
+        this.querySelector(".thumbnail-overlay").classList.remove("visible");
+      });
+    });
+
+
+    /* ── 8. Modal close listeners ────────────────────────────────── */
+
+    /* × button */
+    modalClose.addEventListener("click", closeModal);
+
+    /* Click dark backdrop */
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    /* Escape key */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && overlay.classList.contains("open")) {
+        closeModal();
+      }
+    });
+
+
+    /* ── 9. Customise button listeners ───────────────────────────── */
+    schemeBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () { applyScheme(this.dataset.scheme); });
+    });
+
+    fontBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () { applyFont(this.dataset.font); });
+    });
+
+  </script>
+
+
+
+
+</body>
+
+</html>

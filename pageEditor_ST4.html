@@ -1,0 +1,532 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<!-- Basic document setup -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aamina Rifas - Page Editor · ConsumeRight</title>
+	
+	<!-- Shared stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body id="top">
+
+	<!-- Accessibility skip link -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Header and navigation -->
+    <header class="site-header">
+        <div class="site-branding">
+            <div class="brand-lockup">
+
+                <!-- Logo linking back to home -->
+                <a class="site-logo" href="home.html" aria-label="ConsumeRight home">
+                    <img src="images/logo.png" alt="ConsumeRight logo">
+                </a>
+
+                <p class="site-title">
+                    <a href="home.html">ConsumeRight</a>
+                    <span>SDG 12: Responsible consumption and production</span>
+                </p>
+            </div>
+			
+			<!-- Main nav -->
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="ais.html">AIS</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-wrap">
+        <div class="layout-body">
+
+			<!--Sidebar nav-->
+            <aside class="sidebar-nav">
+                <nav aria-label="Page sections">
+                    <p class="sidebar-nav__title" style="margin-top:1rem;">Page editor</p>
+					
+					<!-- Links to other students' editors -->
+                    <details>
+                        <summary>Student 1 — Safiya Nazly — Page Editor</summary>
+                        <div class="sidebar-nav__sub">
+                            <ul class="sidebar-nav__list">
+                                <li><a href="pageEditor_ST1.html">Open Student 1 page editor</a></li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Student 2 — Lakna Dasuni — Page Editor</summary>
+                        <div class="sidebar-nav__sub">
+                            <ul class="sidebar-nav__list">
+                                <li><a href="pageEditor_ST2.html">Open Student 2 page editor</a></li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Student 3 — Raiqa Abdul Qadir — Page Editor</summary>
+                        <div class="sidebar-nav__sub">
+                            <ul class="sidebar-nav__list">
+                                <li><a href="pageEditor_ST3.html">Open Student 3 page editor</a></li>
+                            </ul>
+                        </div>
+                    </details>
+
+					<!-- Current student section -->
+                    <details open>
+                        <summary>Student 4 — Aamina Rifas — Page Editor</summary>
+                        <div class="sidebar-nav__sub">
+                            <ul class="sidebar-nav__list">
+								<!-- Internal navigation links -->
+                                <li><a href="#overview">Overview</a></li>
+                                <li><a href="#tasks">Completed pages</a></li>
+                                <li><a href="#technical">Technical description</a></li>
+                                <li><a href="#challenges">Challenges &amp; lessons</a></li>
+                                <li><a href="#a11y">Accessibility</a></li>
+                                <li><a href="#janet">JANET compliance</a></li>
+                                <li><a href="#meetings">Meeting log</a></li>
+                                <li><a href="#references">References</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                </nav>
+            </aside>
+
+            <!-- Main content -->
+            <main id="main-content" class="main-content">
+
+                <!-- Overview section -->
+                <section id="overview" class="page-intro">
+                    <h1>Technical report — Aamina Rifas</h1>
+
+                    <!-- Student details -->
+                    <p>
+                        <strong>Name:</strong> Aamina Rifas<br>
+                        <strong>Student number:</strong> 20241279 || w2181573<br>
+                        <strong>Role:</strong> Student 4 — User Profile Page, Sitemap Page, and Content Page
+                    </p>
+					
+					<!-- Quick nav links -->
+                    <p>
+                        Jump to:
+                        <a href="#tasks">Completed pages</a> ·
+                        <a href="#technical">Technical</a> ·
+                        <a href="#challenges">Reflection</a> ·
+                        <a href="#a11y">Accessibility</a> ·
+                        <a href="#janet">JANET</a> ·
+                        <a href="#meetings">Meetings</a> ·
+                        <a href="#references">References</a>
+                    </p>
+                </section>
+
+                <div class="section-stack">
+
+                    <!-- Completed pages -->
+					<section id="tasks" class="card">
+                        <h2>Completed pages and features</h2>
+                        <p>Everything I personally built as part of this group project:</p>
+                        
+						<!-- Links to pages + validation -->
+						<ul>
+                            <li>
+                                <a href="profile.html" target="_blank" rel="noopener noreferrer">profile.html</a>
+                                — <a href="validation_ST4.html#profile-val">validation evidence</a>
+                            </li>
+                            <li>
+                                <a href="sitemap.html" target="_blank" rel="noopener noreferrer">sitemap.html</a>
+                                — <a href="validation_ST4.html#sitemap-val">validation evidence</a>
+                            </li>
+                            <li>
+                                <a href="content_ST4.html" target="_blank" rel="noopener noreferrer">content_ST4.html</a>
+                                — <a href="validation_ST4.html#content_st4-val">validation evidence</a>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="technical" class="card">
+                        <h2>Technical description (per page)</h2>
+                        <p>
+                            For each page below I explain the key HTML structure, JavaScript,
+                            and design decisions that support usability, consistency, and accessibility.
+                        </p>
+
+                        <h3>profile.html</h3>
+                        <p>
+                            <a href="profile.html" target="_blank" rel="noopener noreferrer">Open live page</a> ·
+                            <a href="validation_ST4.html#profile-val">Validation evidence</a>
+                        </p>
+                        <p>
+                            The User Profile page uses semantic HTML elements such as
+                            <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>,
+                            and <code>&lt;section&gt;</code>. Within the main content area, I divided the page into
+                            clear sections for the introduction, profile builder controls, progress display,
+                            and profile summary. This structure improves readability and makes the page easier to
+                            follow for both visual users and screen reader users.
+                        </p>
+                        <p>
+                            JavaScript prompt boxes were used because the coursework specifically required
+                            <code>prompt()</code> instead of a normal HTML form. I organised the logic into separate
+                            functions for each step, revisiting skipped questions, updating progress, and showing the
+                            profile summary dynamically. This allowed the page to update without reloading and made it
+                            possible to reveal completed sections progressively.
+                        </p>
+                        <p>
+                            In terms of presentation, I relied on the shared stylesheet for the main page layout and
+                            added only minimal page-specific styling for interactive elements such as the profile
+                            buttons, progress track, progress bar, and step summary boxes. This kept the page visually
+                            consistent with the group website while still making the profile feature clear and usable.
+                        </p>
+
+                        <h3>sitemap.html</h3>
+                        <p>
+                            <a href="sitemap.html" target="_blank" rel="noopener noreferrer">Open live page</a> ·
+                            <a href="validation_ST4.html#sitemap-val">Validation evidence</a>
+                        </p>
+                        <p>
+                            The Sitemap page uses the standard shared page structure with a header, main content area,
+                            “Go to top” link, and shared footer. Inside the main content, the website hierarchy is
+                            presented using an inline SVG rather than a static image. This matches the coursework
+                            requirement to create a graphical sitemap using SVG.
+                        </p>
+                        <p>
+                            Each page is represented by a separate SVG node made from a rounded rectangle and text
+                            label, with connector lines showing the relationship between sections of the site. I used
+                            links inside the SVG so that each node can be clicked directly. This makes the page more
+                            interactive and gives it a real navigation function rather than making it purely visual.
+                        </p>
+                        <p>
+                            Styling choices focused on spacing, alignment, hover feedback, and readability at
+                            different widths. A small amount of page-specific CSS was added only for the SVG component
+                            because the shared stylesheet does not include node, line, and focus styling for a sitemap
+                            diagram. This kept the page aligned with the shared template without replacing the group
+                            design system.
+                        </p>
+
+                        <h3>content_ST4.html</h3>
+                        <p>
+                            <a href="content_ST4.html" target="_blank" rel="noopener noreferrer">Open live page</a> ·
+                            <a href="validation_ST4.html#content_st4-val">Validation evidence</a>
+                        </p>
+                        <p>
+                            My content page was built using the shared two-column content template, with a left sidebar
+                            for internal navigation and a main content area for the article sections. The page uses one
+                            main <code>&lt;h1&gt;</code> followed by multiple <code>&lt;h2&gt;</code> and
+                            <code>&lt;h3&gt;</code> headings in a clear hierarchy. Each section has a unique
+                            <code>id</code> so that internal anchor links can move the user directly to the correct
+                            part of the page.
+                        </p>
+                        <p>
+                            My final topic was e-waste management, with a focus on what e-waste is, its global impact,
+                            how students contribute to the problem, disposal issues, practical solutions, and
+                            sustainable tech habits. I chose this structure because it allowed the page to go into
+                            depth on one subtopic rather than covering the whole SDG too broadly.
+                        </p>
+                        <p>
+                            I used the shared layout and card system from the template, then added only light
+                            page-specific styling for the content images so that they fit neatly within the design.
+                            The side navigation menu, section stack, and “Go to top” link all help the page function
+                            as a structured webpage rather than a plain article.
+                        </p>
+                    </section>
+
+                    <section id="challenges" class="card card-expand">
+                        <h2>Challenges and lessons learned</h2>
+                        <p>
+                            The most significant challenges were integrating my original pages into the shared template
+                            system and refining the interactive features so that they still matched the group website.
+                        </p>
+						
+						<!-- Expandable section to keep layout clean -->
+                        <details>
+                            <summary>Read the full reflection</summary>
+                            <div class="card-expand__body">
+                                <h3>Challenge: integrating independent work into the shared template</h3>
+                                <p>
+                                    My original versions of the User Profile, Sitemap, and Content Page were built
+                                    with their own full styling. Once Student 1 shared the final templates and
+                                    stylesheet, I had to restructure my work so that it used the shared header,
+                                    footer, navigation, and layout classes without losing the page-specific features I
+                                    had already built.
+                                </p>
+                                <p>
+                                    This was especially challenging for the User Profile page and Sitemap page, because
+                                    both contained unique components that were not already covered by the shared
+                                    stylesheet. For the profile page, this included the prompt-driven buttons, dynamic
+                                    progress bar, and summary boxes. For the sitemap page, it included the SVG node and
+                                    connector styling. I solved this by keeping the shared stylesheet as the main
+                                    system and adding only small page-specific CSS for custom components.
+                                </p>
+                                <p>
+                                    I also had to refine the scope of my content page. At first it covered multiple
+                                    sustainability topics, but once the group finalised who was taking which subtopic,
+                                    I narrowed my content page to e-waste management. This made the page more focused,
+                                    more relevant to my role, and less repetitive with other students’ pages.
+                                </p>
+                                <p>
+                                    From these challenges, I learned that technical work is not only about writing
+                                    code but also about integration, consistency, and adapting to shared project
+                                    constraints. I also improved my confidence in using semantic HTML, JavaScript for
+                                    user interaction, SVG for structure diagrams, and internal linking for long-form
+                                    pages.
+                                </p>
+                            </div>
+                        </details>
+                    </section>
+
+                    <!-- Accessibility -->
+					<section id="a11y" class="card">
+                        <h2>Accessibility considerations</h2>
+                        <p>
+                            I considered accessibility across all of my pages by using semantic HTML, clear heading
+                            order, meaningful link text, and a consistent page structure. Each page uses one main
+                            heading followed by lower-level headings in a logical sequence, which makes the structure
+                            easier for screen readers and keyboard users to follow.
+                        </p>
+                        <p>
+                            On the content page, all images include descriptive alt text that explains the purpose of
+                            the image rather than using empty or vague labels. On the sitemap page, each SVG node
+                            includes a visible text label as well as a title so that the links are easier to interpret.
+                            On the profile page, the progress area includes a progressbar role and live progress text
+                            so that dynamic updates are more accessible.
+                        </p>
+                        <p>
+                            Keyboard accessibility was also supported through the shared skip link, standard focusable
+                            links, and button controls. I avoided relying only on visual cues by maintaining readable
+                            contrast, visible headings, and straightforward navigation patterns. These choices improve
+                            usability for a wider range of users and help align the site with inclusive design
+                            expectations.
+                        </p>
+                    </section>
+
+                    <!-- Compliance -->
+					<section id="janet" class="card">
+                        <h2>Compliance with JANET regulations</h2>
+                        <p>
+                            JANET guidance emphasises lawful, ethical, and responsible use of web technologies in
+                            educational contexts. The compliance material provided for the coursework highlights that
+                            student web projects should keep content appropriate and educational, avoid collecting
+                            unnecessary personal data, follow copyright rules for third-party materials, and maintain
+                            accessibility standards such as WCAG 2.1 AA.
+                        </p>
+                        <p>
+                            In my own pages, I followed this by keeping the content relevant to the coursework topic
+                            and suitable for an academic audience. I did not include misleading, offensive, or
+                            inappropriate material, and I did not design any page to collect personal data beyond the
+                            temporary prompt-based interactions required for the profile task. Since the profile
+                            information is not stored externally, this avoids unnecessary handling of personal data.
+                            JANET-related guidance also stresses legal and ethical accessibility responsibilities, so I
+                            incorporated semantic structure, alt text, and keyboard-friendly navigation accordingly.
+                        </p>
+                        <p>
+                            External resources were also considered carefully. My content page uses externally sourced
+                            images, so these should be acknowledged properly in the references section and treated as
+                            third-party material rather than presented as my own work. The compliance guidance
+                            specifically notes the importance of following copyright law and maintaining academic
+                            integrity, so I have been careful to keep my written content original and to distinguish my
+                            own contribution from shared team work.
+                        </p>
+                    </section>
+
+                    <!-- Meetings -->
+					<section id="meetings" class="card">
+                        <h2>Group meetings and individual contribution log</h2>
+                        <p class="meeting-note">
+                            This log records my own participation and contribution across the group process.
+                        </p>
+                        <div class="table-wrap"> 
+						<table>
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Date &amp; time</th>
+									<th>Format</th>
+									<th>Objective</th>
+									<th>Attended</th>
+									<th>My individual contribution</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr>
+									<td>1</td>
+									<td>25 Feb 2026</td>
+									<td>Face-to-face</td>
+									<td>Agreed on SDG and assigned roles</td>
+									<td>Yes</td>
+									<td>I agreed to take responsibility for the User Profile page, Sitemap page, and my individual content page.</td>
+								</tr>
+
+								<tr>
+									<td>2</td>
+									<td>06 Mar 2026</td>
+									<td>Online</td>
+									<td>Agreed on website name, colour palette and visual identity</td>
+									<td>Yes</td>
+									<td>I contributed ideas for layout and reviewed how my pages would align with the group design.</td>
+								</tr>
+
+								<tr>
+									<td>3</td>
+									<td>13 Mar 2026</td>
+									<td>Face-to-face</td>
+									<td>Progress update and content planning</td>
+									<td>Yes</td>
+									<td>I discussed my content topic (e-waste management) and planned the structure of my content page.</td>
+								</tr>
+
+								<tr>
+									<td>4</td>
+									<td>19 Mar 2026</td>
+									<td>Online</td>
+									<td>Review individual pages and provide feedback</td>
+									<td>Yes</td>
+									<td>I shared progress on my User Profile and Sitemap pages and took feedback to improve layout and functionality.</td>
+								</tr>
+
+								<tr>
+									<td>5</td>
+									<td>24 Mar 2026</td>
+									<td>Face-to-face</td>
+									<td>Integration review and template coordination</td>
+									<td>Yes</td>
+									<td>I adjusted my pages to match the shared template and ensured navigation and styling were consistent.</td>
+								</tr>
+
+								<tr>
+									<td>6</td>
+									<td>26 Mar 2026</td>
+									<td>Online</td>
+									<td>Final review and submission preparation</td>
+									<td>Yes</td>
+									<td>I finalised my pages, checked validation results, and ensured all links between pages were working correctly.</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+                    </section>
+
+                    <!-- References -->
+					<section id="references" class="card">
+                        <h2>References</h2>
+						<h3>General sources</h3>
+						<ul>
+							<li>
+								Module lecture notes and Blackboard coursework materials. Available at: 
+								<a href="https://learning.westminster.ac.uk/ultra/courses/_104670_1/outline" target="_blank">https://learning.westminster.ac.uk/</a> (Accessed: 19 March 2026)
+							</li>
+							
+							<li>
+								Mozilla Developer Network (MDN), n.d. HTML, CSS, JavaScript and SVG documentation. Available at: 
+								<a href="https://developer.mozilla.org/" target="_blank">https://developer.mozilla.org/</a> (Accessed: 19 March 2026).
+							</li>
+
+							<li>
+								W3Schools, n.d. HTML, CSS and JavaScript tutorials. Available at: 
+								<a href="https://www.w3schools.com/" target="_blank">https://www.w3schools.com/</a> (Accessed: 19 March 2026).
+							</li>
+							
+							<li>
+								W3C Markup Validation Service — HTML validation checks for implemented pages. Available at: 
+								<a href="https://validator.w3.org/" target="_blank">https://validator.w3.org/</a> (Accessed: 29 March 2026).
+							</li>
+							
+							<li>JANET compliance guidance provided through the module resources.</li>
+						</ul>
+
+						<h3>Image sources</h3>
+						<ul>
+							<li>
+								Image 1: iStock (royalty-free, licensed). ArtemisDiana, 2022.
+								<a href="https://www.istockphoto.com/vector/green-computing-and-computational-sustainability-conceptual-illustration-gm1437772742-478475587" target="_blank">View image</a>
+							</li>
+
+							<li>
+								Image 2: iStock (royalty-free, licensed). Andrey Mitrofanov, 2022.
+								<a href="https://www.istockphoto.com/photo/old-electronic-devices-on-a-dark-background-the-concept-of-recycling-and-disposal-of-gm1367369922-437650783" target="_blank">View image</a>
+							</li>
+
+							<li>
+								Image 3: iStock (royalty-free, licensed). Smileus, 2016.
+								<a href="https://www.istockphoto.com/photo/enchanting-sunshine-on-green-treetops-gm598057526-102465915" target="_blank">View image</a>
+							</li>
+
+							<li>
+								Image 4: iStock (royalty-free, licensed). CrispyPork, 2019.
+								<a href="https://www.istockphoto.com/photo/back-to-school-education-knowledge-college-university-concept-young-people-being-gm1154799572-314154491" target="_blank">View image</a>
+							</li>
+
+							<li>
+								Image 5: iStock (royalty-free, licensed). SteveAllenPhoto, 2024.
+								<a href="https://www.istockphoto.com/photo/electrical-waste-old-technology-for-recycling-gm2147725500-569084098" target="_blank">View image</a>
+							</li>
+
+							<li>
+								Image 6: iStock (royalty-free, licensed). NIKOLA ILIC PR AGENCIJA ZA DIZAJN STUDIOTRIPOD SURCIN, 2020.
+								<a href="https://www.istockphoto.com/photo/car-chip-tuning-gm1206919144-348266705" target="_blank">View image</a>
+							</li>
+
+							<li>
+								Image 7: iStock (royalty-free, licensed). Eduard Lysenko, 2019.
+								<a href="https://www.istockphoto.com/photo/mobile-phone-repair-hands-closeup-gm1094500402-293756852" target="_blank">View image</a>
+							</li>
+
+							<li>
+								Image 8: iStock (royalty-free, licensed). gorodenkoff, 2024.
+								<a href="https://www.istockphoto.com/photo/close-up-shot-of-boxes-with-computer-parts-sorted-for-recycling-at-sustainable-gm2189587804-608034892" target="_blank">View image</a>
+							</li>
+						</ul>
+                    </section>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Back to top -->
+	<div class="to-top"><a href="#top">Go to top</a></div>
+
+    <!-- Footer -->
+	<footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>ConsumeRight</strong>
+                <p>Group 1 - Sub-group 2</p>
+                <p>SDG 12 : Responsible consumption and production</p>
+            </div>
+            <nav class="footer-docs">
+                <div>
+                    <h3>Page editors</h3>
+                    <ul>
+                        <li><a href="pageEditor_ST1.html">Safiya Nazly — Page Editor</a></li>
+                        <li><a href="pageEditor_ST2.html">Lakna Dasuni — Page Editor</a></li>
+                        <li><a href="pageEditor_ST3.html">Raiqa Abdul Qadir — Page Editor</a></li>
+                        <li><a href="pageEditor_ST4.html">Aamina Rifas — Page Editor</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Validation</h3>
+                    <ul>
+                        <li><a href="validation_ST1.html">Safiya Nazly — Validation</a></li>
+                        <li><a href="validation_ST2.html">Lakna Dasuni — Validation</a></li>
+                        <li><a href="validation_ST3.html">Raiqa Abdul Qadir — Validation</a></li>
+                        <li><a href="validation_ST4.html">Aamina Rifas — Validation</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>

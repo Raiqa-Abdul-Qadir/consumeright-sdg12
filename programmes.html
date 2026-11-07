@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Programme Directory</title>
+    <link rel="stylesheet" href="css/style.css">
+	<style>
+		/* Grid inside the scroll area */
+        .programme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* It creates two columns of equal width that will appear whether the screen is expanded or shrinked */
+			gap: 10px; /* Creates empty space between columns and rows */
+            padding: 15px;
+        }
+		
+		/* Individual programme card */
+        .programme-card {
+            background-color: var(--surface-soft);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .programme-card:hover {
+            transform: translateY(-4px); /* This is used to lift the card up and to grow the card */
+            box-shadow: 0 8px 20px rgba(45,106,79,0.15);
+        }
+
+        .programme-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover; /* Fill the box until both width and height are covered */
+        }
+		
+		.content-img-caption {
+            text-align: center;
+            font-size: 15px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .programme-card-body {
+            padding: 15px;
+        }
+
+        .programme-card-body h3 {
+            color: var(--accent-strong);
+        }
+
+        .programme-card-body p {
+            color: var(--text-muted);
+        }
+
+        .programme-card-body .btn {
+            font-size: 15px;
+            padding: 20px;
+        }
+		
+		.btn-hover:hover {
+			background-color: var(--accent-strong); 
+			color: var(--surface);                 
+			transform: scale(1.05);                 
+			transition: all 0.2s ease;  
+		}
+
+		.programme-table th {
+			background-color: var(--accent-strong);
+			color: var(--surface);
+			text-align: center;
+		}
+
+		.programme-table td {
+			border: 2px solid var(--border);
+			color: var(--text);
+			text-align: center;
+		}
+
+		.programme-table tr:nth-child(even) td { /* Gives customize colors for even rows */
+			background-color: var(--surface-soft);
+		}
+		
+		.programme-card {
+			position: relative; /* Moves the element without affecting surrounding layout */
+		}
+		
+		/* Heart button styling */
+		.heart-btn {
+			position: absolute; /* Spaces are ignored */
+			top: 10px;
+			right: 10px;
+			background-color: var(--surface);
+			color: var(--accent-strong);  
+			border: none;
+			font-size: 30px;
+			cursor: pointer; /* To the tell the user its clickable */
+			border-radius: 40px;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+			transition: transform 0.2s ease;
+		}
+
+		.heart-btn:hover {
+			transform: scale(1.1);
+		}
+		
+		/* Responsive layout - adjusts grid columns for different screen sizes */
+        @media (max-width: 768px) {
+            .programme-grid {
+                grid-template-columns: 1fr;
+			}
+		}
+		
+	</style>
+</head>
+<body>
+<div class="programme-grid">
+
+    <!-- Card 1: Too Good To Go -->
+    <div class="programme-card">
+		<button class="heart-btn" 
+			onclick="toggleHeart(this)" 
+			aria-label="Add to favorites" 
+			title="Favorite"> <!-- Tooltip -->
+			<span aria-hidden="true">♡</span>
+		</button>
+		<img src="images/TooGoodToGo.jpg" alt="A bag of rescued food items">
+        <p class="content-img-caption">A bag of rescued food items for half the price to make a quality meal. 
+		(Source: iStockPhoto)</p>
+		<div class="programme-card-body">
+			<h3>Too Good To Go</h3>
+            <p>A social impact app tackling food waste by connecting users with local businesses to rescue unsold food. For a fraction of the retail price, students can purchase "Surprise Bags" of high-quality meals, helping to protect natural resources and reduce environmental impact while saving money.</p>
+			<table class="programme-table">
+				<tr>
+					<th>Duration</th>
+					<th>Type</th>
+					<th>Program Fees</th>
+				</tr>
+				<tr>
+					<td>Instant / Daily</td>
+					<td>Food Rescue</td>
+					<td>Save up to 70%</td>
+				</tr>
+				<tr>
+					<td colspan="3"><strong>Ages 16+</strong></td>
+				</tr>
+			</table>
+			<a href="#" class="btn-hover">Join Now</a> 
+        </div>
+    </div>
+
+    <!-- Card 2: Campus Swap Shop -->
+	<div class="programme-card">
+		<button class="heart-btn" 
+			onclick="toggleHeart(this)" 
+			aria-label="Add to favorites" 
+			title="Favorite"> 
+			<span aria-hidden="true">♡</span>
+		</button>
+		<img src="images/CampusSwapShop.jpg" alt="Students exchanging books at a campus swap shop event">
+		<p class="content-img-caption">Students exchanging pre-owned books for other necessary items at a campus swap shop event. 
+		(Source: iStockPhoto)</p>
+		<div class="programme-card-body">
+			<h3>Campus Swap Shop</h3>
+			<p>A student-led initiative promoting a circular economy by providing a space to exchange pre-loved clothes, books, and essentials. By encouraging reuse over buying new, the program reduces waste and helps students save money while decreasing the demand for fast fashion.</p>
+			<table class="programme-table">
+				<tr>
+					<th>Duration</th>
+					<th>Type</th>
+					<th>Program Fees</th>
+				</tr>
+				<tr>
+					<td>11am - 3pm</td>
+					<td>Community Swap</td>
+					<td>Free (Swap only)</td>
+				</tr>
+				<tr>
+					<td colspan="3"><strong>Students 16+</strong></td>
+				</tr>
+			</table>
+			<a href="#" class="btn-hover">Get Involved</a> 
+		</div>
+	</div>
+
+    <!-- Card 3: Repair Cafe -->
+    <div class="programme-card">
+		<button class="heart-btn" 
+			onclick="toggleHeart(this)" 
+			aria-label="Add to favorites" 
+			title="Favorite"> 
+			<span aria-hidden="true">♡</span>
+		</button>
+        <img src="images/RepairCafe.jpg" alt="Volunteers repairing broken items at a Repair Cafe event">
+        <p class="content-img-caption">Volunteers teach students how to repair broken items rather than disposal. 
+		(Source: iStockPhoto)</p>
+		<div class="programme-card-body">
+			<h3>Repair Cafe</h3>
+			<p>A community initiative that helps reduce waste by fixing broken household items. Expert volunteers help students repair electronics, clothes, and furniture, promoting a culture of repair over disposal. This program saves money and keeps functional materials out of landfills.</p>
+			<table class="programme-table">
+				<tr>
+					<th>Duration</th>
+					<th>Type</th>
+					<th>Program Fees</th>
+				</tr>
+				<tr>
+					<td>2 Hours</td>
+					<td>Repair Service</td>
+					<td>Pay what you feel</td>
+				</tr>
+				<tr>
+					<td colspan="3"><strong>Ages 16+</strong></td>
+				</tr>
+			</table>
+			<a href="#" class="btn-hover">Learn More</a> 
+		</div>
+	</div>
+
+    <!-- Card 4: Plastic Free July Challenge -->
+    <div class="programme-card">
+		<button class="heart-btn" 
+			onclick="toggleHeart(this)" 
+			aria-label="Add to favorites" 
+			title="Favorite"> 
+			<span aria-hidden="true">♡</span>
+		</button>
+        <img src="images/PlasticFreeJulyChallenge.jpg" alt="Reusable Plastics as part of the Plastic Free July Challenge">
+		<p class="content-img-caption">Helps students find alternatives as part as a campaign, while understanding the impacts of it. 
+		(Source: iStockPhoto)</p>
+        <div class="programme-card-body">
+			<h3>Plastic Free July Challenge</h3>
+			<p>A global campaign challenging people to reduce single-use plastic. It provides resources to help students find sustainable alternatives to packaging and disposable items. Joining this movement helps build long-term eco-friendly habits and protects the oceans from plastic pollution.</p>
+			<table class="programme-table">
+				<tr>
+					<th>Duration</th>
+					<th>Type</th>
+					<th>Program Fees</th>
+				</tr>
+				<tr>
+					<td>One Month (July)</td>
+					<td>Awareness Challenge</td>
+					<td>Free</td>
+				</tr>
+				<tr>
+					<td colspan="3"><strong>Open to 16+</strong></td>
+				</tr>
+			</table>
+            <a href="#" class="btn-hover">Take the Pledge</a> 
+        </div>
+    </div>
+</div> 
+	<!-- JavaScript -->
+    <script>
+	
+		/* Heart button toggle - adds to favourites */
+		function toggleHeart(btn) {
+			const span = btn.querySelector('span');
+			if (span.textContent === '♡') {
+				span.textContent = '♥'; /* Filled heart when clicked */
+			} else {
+				span.textContent = '♡'; /* Empty heart when clicked again */
+			}
+		}
+	</script>
+</body> 
+</html>   
+  
+            
+ 
